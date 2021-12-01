@@ -1,3 +1,3 @@
 public interface PayRoll{
-    void computerPayRoll();
+    double computerPayRoll(double pay);
 }
