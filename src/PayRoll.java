@@ -1,3 +1,5 @@
-public interface PayRoll{
-    double computerPayRoll(double pay);
+public interface PayRoll {
+
+
+    
 }
