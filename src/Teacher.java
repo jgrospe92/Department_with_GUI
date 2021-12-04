@@ -57,7 +57,7 @@ public class Teacher extends Person implements PayRoll{
         return true;
     }
     @Override
-    public double computerPayRoll() {
+    public double computePayRoll() {
 
         int salDegree = (this.degree == "PhD") ? 112 : (this.degree == "Master" ? 82 : 42); 
         return (35 * salDegree * 2) * 0.76;
