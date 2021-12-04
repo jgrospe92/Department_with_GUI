@@ -38,8 +38,15 @@ public class Staff extends Person implements PayRoll{
     
     //Methods
     @Override
-    public double computerPayRoll(double pay){
-        return pay;
+    public double computePayRoll(){
+
+        double result = 0.0;
+        if (this.workload <= 36 && this.workload >= 0){
+            result = (this.workload * 32 * 2 ) * 0.82;
+        } else {
+            System.out.println("Workload exceeds limit");
+        }
+        return result;
     }
     @Override
     public void display(){
@@ -59,6 +66,5 @@ public class Staff extends Person implements PayRoll{
         }
         return true;
     }
-
     
 }

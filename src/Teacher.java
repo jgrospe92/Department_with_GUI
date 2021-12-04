@@ -1,4 +1,4 @@
-public class Teacher extends Person{
+public class Teacher extends Person implements PayRoll{
     private String speciality;
     private String degree;
 
@@ -55,5 +55,12 @@ public class Teacher extends Person{
             }
         }
         return true;
+    }
+    @Override
+    public double computerPayRoll() {
+
+        int salDegree = (this.degree == "PhD") ? 112 : (this.degree == "Master" ? 82 : 42); 
+        return (35 * salDegree * 2) * 0.76;
+
     }
 }
