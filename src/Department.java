@@ -17,56 +17,50 @@ public class Department {
     ArrayList<Student> StudentList = new ArrayList<>();
     ArrayList<Staff> StaffList = new ArrayList<>();
 
+    // Getters
     public int getId() {
         return this.id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getDescription() {
         return this.description;
+    }
+    public Teacher getDean() {
+        return this.dean;
+    }
+    // ArrayList
+    public ArrayList<Staff> getStaffList() {
+        return this.StaffList;
+    }
+    public ArrayList<Student> getStudentList() {
+        return this.StudentList;
+    }
+    public ArrayList<Teacher> getTeacherList() {
+        return this.TeacherList;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Teacher getDean() {
-        return this.dean;
-    }
-
     public void setDean(Teacher dean) {
         this.dean = dean;
     }
-
-    public ArrayList<Teacher> getTeacherList() {
-        return this.TeacherList;
-    }
-
+    // ArrayList
     public void setTeacherList(ArrayList<Teacher> TeacherList) {
         this.TeacherList = TeacherList;
-    }
-
-    public ArrayList<Student> getStudentList() {
-        return this.StudentList;
     }
 
     public void setStudentList(ArrayList<Student> StudentList) {
         this.StudentList = StudentList;
     }
 
-    public ArrayList<Staff> getStaffList() {
-        return this.StaffList;
-    }
-
     public void setStaffList(ArrayList<Staff> StaffList) {
         this.StaffList = StaffList;
     }
-    
-
-
-    
     
 }

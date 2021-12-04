@@ -4,13 +4,22 @@ public abstract class Person{
     private int age;
     private String gender;
 
+     // empty constructor
+     protected Person(){
+
+    }
+    //Constructor for ID only
+    protected Person(int id){
+        this.id = id;
+    }
     //Constructor
-    public Person(int id, String name, int age, String gender) {
+    protected Person(int id, String name, int age, String gender) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
     }
+   
 
     //Setters
     public void setId(int id) {
@@ -27,6 +36,12 @@ public abstract class Person{
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+    public void display(){
+        System.out.println("ID: " + this.id + "\n" +
+                            "Name: " + this.name + "\n" +
+                            "Age : " + this.age + "\n" +
+                            "Gender : " + this.gender);
     }
 
     //Getters
@@ -45,5 +60,6 @@ public abstract class Person{
     public String getGender() {
         return gender;
     }
+    
 
 }
