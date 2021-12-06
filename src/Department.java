@@ -10,7 +10,13 @@ public class Department {
     private ArrayList<Student> StudentList = new ArrayList<>();
     private ArrayList<Staff> StaffList = new ArrayList<>();
 
-    // Constructor
+    // Constructor for ID and Description
+    public Department(int id, String description){
+        this.id = id;
+        this.description = description;
+    }
+
+    // Constructor ID, description, Dean
     public Department(int id, String description, Teacher dean) {
         this.id = id;
         this.description = description;
