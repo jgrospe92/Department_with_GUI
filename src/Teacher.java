@@ -45,6 +45,11 @@ public class Teacher extends Person implements PayRoll{
                             "Semester: " + this.degree + "\n");
     }
 
+    @Override
+    public String formatted(){
+        return super.formatted() + "," + speciality + "," + degree;
+    }
+
 
     @Override
     public boolean equals(Object obj){
@@ -63,4 +68,5 @@ public class Teacher extends Person implements PayRoll{
         return (35 * salDegree * 2) * 0.76;
 
     }
+
 }

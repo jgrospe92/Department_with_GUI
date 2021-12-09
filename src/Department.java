@@ -40,6 +40,27 @@ public class Department {
         return this.dean;
     }
 
+    public void showInfo(){
+        if(getDean() == null){
+            System.out.println("ID: " + this.id + "\n" + "Description: " + this.description);
+        }
+        else {
+            showInfoWithDean();
+        }
+    }
+
+    public void showInfoWithDean(){
+        System.out.println("ID: " + this.id + "\n" + "Description: " + this.description + " Dean: " + this.dean.getName());
+    }
+
+    public String formattedWithoutDean(){
+        return this.id + "," + this.description;
+    }
+
+    public String formattedWithDean(){
+        return this.id + "," + this.description + "," + this.dean.formatted();
+    }
+
     // ArrayList
     public ArrayList<Staff> getStaffList() {
         return this.StaffList;
