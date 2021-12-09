@@ -10,7 +10,13 @@ public class Department {
     private ArrayList<Student> StudentList = new ArrayList<>();
     private ArrayList<Staff> StaffList = new ArrayList<>();
 
-    // Constructor
+    // Constructor for ID and Description
+    public Department(int id, String description){
+        this.id = id;
+        this.description = description;
+    }
+
+    // Constructor ID, description, Dean
     public Department(int id, String description, Teacher dean) {
         this.id = id;
         this.description = description;
@@ -32,6 +38,27 @@ public class Department {
 
     public Teacher getDean() {
         return this.dean;
+    }
+
+    public void showInfo(){
+        if(getDean() == null){
+            System.out.println("ID: " + this.id + "\n" + "Description: " + this.description);
+        }
+        else {
+            showInfoWithDean();
+        }
+    }
+
+    public void showInfoWithDean(){
+        System.out.println("ID: " + this.id + "\n" + "Description: " + this.description + " Dean: " + this.dean.getName());
+    }
+
+    public String formattedWithoutDean(){
+        return this.id + "," + this.description;
+    }
+
+    public String formattedWithDean(){
+        return this.id + "," + this.description + "," + this.dean.formatted();
     }
 
     // ArrayList

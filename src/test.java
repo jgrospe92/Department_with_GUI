@@ -12,31 +12,72 @@ public class test {
         ArrayList<Staff> staffList = new ArrayList<>();
         ArrayList<Department> deptList = new ArrayList<>();
 
-        Teacher t1 = new Teacher(123);
+        // import Test
 
-        Department addDept1 = new Department(1001, "test", t1);
-        Department addDept2 = new Department(222, "test", t1);
-        Department addDept3 = new Department(333, "test", t1);
+        FileReadandWrite fileImp = new FileReadandWrite();
+
+        System.out.println(fileImp.newFile()); 
+
+        // String filename = "Department";
+
+        // fileImp.fileImportDepartment(filename, deptList, teachList);
+
+        // for(Department dd: deptList){
+        //     dd.showInfo();
+        // }
+        // for (Teacher tt: teachList){
+        //     tt.display();
+        // }
+
+        // fileImp.fileExportDepartment("Dept", deptList);
+
+        // String teacherFIle = "Teacher";
+        // fileImp.fileImportTeacher(teacherFIle, deptList, teachList);
+
+        // for(Teacher tt: teachList){
+        //     tt.display();
+        // }
+
+        // String studentFIle = "Student";
+        // fileImp.fileImportStudent(studentFIle, deptList, studList);
+
+        // for(Student ss: studList){
+        //     ss.display();
+        // }
+
+        // String staffFile = "Staff";
+        // fileImp.fileImportStaff(staffFile, deptList, staffList);
+        // for (Staff st : staffList){
+        //     st.display();
+        // }
 
 
-        deptList.add(addDept1);
-        deptList.add(addDept2);
-        deptList.add(addDept3);
+
+        // Teacher t1 = new Teacher(123);
+
+        // Department addDept1 = new Department(1001, "test", t1);
+        // Department addDept2 = new Department(222, "test", t1);
+        // Department addDept3 = new Department(333, "test", t1);
 
 
-        if (deptList.contains(new Department(222))){
-            System.out.println("true");
-        } else {
-            System.out.println("false");
-        }
+        // deptList.add(addDept1);
+        // deptList.add(addDept2);
+        // deptList.add(addDept3);
+
+
+        // if (deptList.contains(new Department(1001))){
+        //     System.out.println("true");
+        // } else {
+        //     System.out.println("false");
+        // }
 
         
-        Student ss1 = new Student(123, "jeffrey", 21, "male", "pc", 1);
-        Student ss2 = new Student(222, "ped", 21, "male", "pc", 1);
-        studList.add(ss1);
-        studList.add(ss2);
-        Student find = new Student(222, "ped", 21, "male", "pc", 1);
-        Student find1 = new Student(555);
+        // Student ss1 = new Student(123, "jeffrey", 21, "male", "pc", 1);
+        // Student ss2 = new Student(222, "ped", 21, "male", "pc", 1);
+        // studList.add(ss1);
+        // studList.add(ss2);
+        // Student find = new Student(222, "ped", 21, "male", "pc", 1);
+        // Student find1 = new Student(555);
  
         //  //System.out.println(StuList.contains(find1));
         // //StuList.get(0).display();
@@ -54,18 +95,6 @@ public class test {
        
         //data.fileImport(filename, deptList, teachList, studList, staffList);
 
-        String d1 = "PhD";
-        String d2 = "Master";
-        String d3 = "Bachelor";
-
-        // int t1 = 1;
-        // int t2 = 2;
-        // int t3 = 3;
-
-        String entry = d3;
-
-        int result = (entry == "PhD") ? 112: (entry == "Master" ? 94 : 0);
-
-        System.out.println(result);
+        
     }
 }

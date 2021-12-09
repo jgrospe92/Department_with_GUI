@@ -37,11 +37,16 @@ public abstract class Person{
     public void setGender(String gender) {
         this.gender = gender;
     }
+    // Special method
     public void display(){
         System.out.println("ID: " + this.id + "\n" +
                             "Name: " + this.name + "\n" +
                             "Age : " + this.age + "\n" +
                             "Gender : " + this.gender);
+    }
+
+    public String formatted(){
+        return id + "," + name + "," + age + ","  + gender;
     }
 
     //Getters

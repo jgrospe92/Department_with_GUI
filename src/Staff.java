@@ -55,6 +55,11 @@ public class Staff extends Person implements PayRoll{
                             "Semester: " + this.workload + "\n");
     }
 
+    @Override
+    public String formatted(){
+        return super.formatted() + "," + duty + "," + workload;
+    }
+
 
     @Override
     public boolean equals(Object obj){

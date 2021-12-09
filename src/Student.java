@@ -26,8 +26,6 @@ public class Student extends Person{
         this.semester = semester;
     }
 
-    
-
     //Getters
     public String getCourse() {
         return course;
@@ -42,6 +40,11 @@ public class Student extends Person{
         super.display();
         System.out.println("Course: " + this.course + "\n" + 
                             "Semester: " + this.semester + "\n");
+    }
+
+    @Override
+    public String formatted(){
+        return super.formatted() + "," + course + "," + semester;
     }
 
 
