@@ -16,15 +16,20 @@ public class test {
 
         FileReadandWrite fileImp = new FileReadandWrite();
 
-        System.out.println(fileImp.newFile()); 
+        //System.out.println(fileImp.newFile()); 
 
-        // String filename = "Department";
+        String filename = "Department";
 
-        // fileImp.fileImportDepartment(filename, deptList, teachList);
+        fileImp.fileImportDepartment(filename, deptList, teachList);
 
-        // for(Department dd: deptList){
-        //     dd.showInfo();
-        // }
+        deptList.get(1).setDean(new Teacher(123, "Jeff", 29, "male", "java","nothing"));
+        System.out.println(deptList.get(1).getDean().computePayRoll()); 
+
+        System.out.println("End statement");
+
+        for(Department dd: deptList){
+            dd.showInfo();
+        }
         // for (Teacher tt: teachList){
         //     tt.display();
         // }

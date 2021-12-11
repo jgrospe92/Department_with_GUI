@@ -83,8 +83,15 @@ public class Department {
         this.description = description;
     }
 
-    public void setDean(Teacher dean) {
-        this.dean = dean;
+    // Exception handling
+    public void setDean(Object dean) {
+        try {
+            this.dean = (Teacher) dean;
+        } catch (Exception e) { // Replace this with the custom exception
+            
+            System.err.println(e.getMessage());
+        }
+        
     }
 
     // ArrayList
