@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 
-public class PleaseProvideControllerClassName {
+public class FXMLController {
 
     @FXML
     private Button BTNDDelete;
