@@ -85,11 +85,12 @@ public class Department {
 
     // Exception handling
     public void setDean(Object dean) {
+        ExceptionHandling invalidDean = new ExceptionHandling("Please assign a Teacher as Dean");
         try {
             this.dean = (Teacher) dean;
         } catch (Exception e) { // Replace this with the custom exception
             
-            System.err.println(e.getMessage());
+            System.err.println(invalidDean.getMessage());
         }
         
     }
