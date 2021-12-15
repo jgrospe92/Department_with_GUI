@@ -1,11 +1,12 @@
-import com.gluonhq.charm.glisten.control.TextField;
+//import com.gluonhq.charm.glisten.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 
-public class FXMLController {
+public class javafxController {
 
     @FXML
     private Button BTNDDelete;
@@ -350,8 +351,6 @@ public class FXMLController {
 
     @FXML
     void DLoad(ActionEvent event) {
-
-        
 
     }
 
