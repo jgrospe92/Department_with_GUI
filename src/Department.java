@@ -5,6 +5,7 @@ public class Department {
     private int id;
     private String description;
     private Teacher dean;
+    private String deanName;
     // ArrayList
     private ArrayList<Teacher> TeacherList = new ArrayList<>();
     private ArrayList<Student> StudentList = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Department {
         this.id = id;
         this.description = description;
         this.dean = dean;
+        this.deanName = dean.getName();
     }
     // ID constructor
     public Department(int id) {
@@ -39,6 +41,9 @@ public class Department {
     public Teacher getDean() {
         return this.dean;
     }
+    public String getDeanName(){
+        return this.deanName;
+    }
 
     public void showInfo(){
         if(getDean() == null){
@@ -49,7 +54,7 @@ public class Department {
         }
     }
 
-    public void showInfoWithDean(){
+    private void showInfoWithDean(){
         System.out.println("ID: " + this.id + "\n" + "Description: " + this.description + " Dean: " + this.dean.getName());
     }
 

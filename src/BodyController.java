@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +11,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -44,14 +49,18 @@ public class BodyController {
     @FXML
     private Tab tabDepartment;
 
+    // Table view for Department
     @FXML
-    private TableColumn<?, ?> tblViewDean;
+    private TableColumn<Department, String> tblViewDean;
 
     @FXML
-    private TableColumn<?, ?> tblViewDesc;
+    private TableColumn<Department, String> tblViewDesc;
 
     @FXML
-    private TableColumn<?, ?> tblViewID;
+    private TableColumn<Department, Integer> tblViewID;
+
+    @FXML
+    private TableView<Department> tvDept;
 
     @FXML
     private TextField tfDean;
@@ -70,12 +79,21 @@ public class BodyController {
     Stage stage;
 
     // ArrayList
-    ArrayList<Department> departmentList = new ArrayList<>();
-    ArrayList<Teacher> teacherLit = new ArrayList<>();
-    ArrayList<Student> studentList = new ArrayList<>();
-    ArrayList<Staff> StaffList = new ArrayList<>();
+    public static ArrayList<Department> departmentList = new ArrayList<>();
+    public static ArrayList<Teacher> teacherList = new ArrayList<>();
+    public static ArrayList<Student> studentList = new ArrayList<>();
+    public static ArrayList<Staff> StaffList = new ArrayList<>();
 
     // ObservableList
+    public static ObservableList<Department> obsDeptList;
+
+    // Initialize Dept
+    public void initializeBooks(ObservableList<Department> dept) {
+        tblViewID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblViewDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tblViewDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
+        tvDept.setItems(dept);
+    }
 
     public void tabAction(ActionEvent event){
 
@@ -93,10 +111,20 @@ public class BodyController {
     }
     public void btnAction(ActionEvent event) {
         if (event.getSource() == btnSubmit) {
+            
+            FileReadandWrite fileImp = new FileReadandWrite();
+            String filename = tftImportName.getText();
+            fileImp.fileImportDepartment(filename, departmentList, teacherList);
+            
+            obsDeptList = FXCollections.observableArrayList(departmentList);
+
+            System.out.println("obs");
+            obsDeptList.get(0).showInfo();
+            initializeBooks(obsDeptList);
             lblImport.setVisible(false);
             tftImportName.setVisible(false);
             btnSubmit.setVisible(false);
-            System.out.println("import done");
+
             
         }
     }

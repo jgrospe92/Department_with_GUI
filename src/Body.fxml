@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
    <children>
       <Label fx:id="labelWelcome" layoutX="9.0" layoutY="442.0" text="welcome," />
@@ -96,7 +95,7 @@
                               <TextField fx:id="tfDean" promptText="enter dean ID" />
                            </children>
                         </VBox>
-                        <TableView layoutX="306.0" layoutY="11.0" prefHeight="265.0" prefWidth="368.0">
+                        <TableView fx:id="tvDept" layoutX="306.0" layoutY="11.0" prefHeight="265.0" prefWidth="368.0">
                           <columns>
                             <TableColumn fx:id="tblViewID" prefWidth="96.0" text="ID" />
                             <TableColumn fx:id="tblViewDesc" prefWidth="154.0" text="Description" />
