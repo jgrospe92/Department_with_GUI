@@ -1,0 +1,3 @@
+1003,Humanities
+1005,Social Science
+1008,Computer Env
