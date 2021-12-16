@@ -22,9 +22,10 @@ public class SceneController {
     }
 
     public void switchToScene2(ActionEvent event) throws IOException {
-        
+
         root = FXMLLoader.load(getClass().getResource("Scene2.fxml")); // use / to check outside
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = new Stage();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

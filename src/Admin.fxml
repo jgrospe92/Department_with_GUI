@@ -19,8 +19,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="tfUser" layoutX="142.0" layoutY="85.0" prefHeight="26.0" prefWidth="232.0" />
-      <PasswordField fx:id="tfPass" layoutX="142.0" layoutY="140.0" prefHeight="26.0" prefWidth="232.0" />
+      <TextField fx:id="tfUser" layoutX="142.0" layoutY="85.0" prefHeight="26.0" prefWidth="232.0" promptText="enter username" />
+      <PasswordField fx:id="tfPass" layoutX="142.0" layoutY="140.0" prefHeight="26.0" prefWidth="232.0" promptText="enter password" />
       <Button fx:id="btnSubmit" layoutX="319.0" layoutY="194.0" mnemonicParsing="false" onAction="#onClicked" text="submit" />
       <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="127.0" layoutY="28.0" prefHeight="26.0" prefWidth="240.0" text="Administrator login">
          <font>

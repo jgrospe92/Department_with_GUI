@@ -19,7 +19,7 @@ public class testForUI extends Application {
        try {
            
            
-           Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml")); // use / to check outside
+           Parent root = FXMLLoader.load(getClass().getResource("Scene1.fxml")); // use / to check outside
            Scene scene = new Scene(root);
            primaryStage.setTitle("Vanier College");
 

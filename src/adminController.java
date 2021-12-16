@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class adminController {
 
     private boolean isJeff = false;
-    private boolean isPhill = false;
+    private boolean isPhil = false;
     private boolean isValidPass = false;
 
     
@@ -54,8 +54,6 @@ public class adminController {
             System.out.print(e);
         }
         
-        
-     
     }
 
     private void verify(ActionEvent event, String username, String password) throws IOException{
@@ -63,11 +61,11 @@ public class adminController {
         try {
             String formattedName = username.toLowerCase();
             isJeff = (formattedName.equals("jeffrey"));
-            isPhill = (formattedName.equals("philip"));
+            isPhil = (formattedName.equals("philip"));
 
             int passW = Integer.parseInt(password);
 
-            isValidPass = (passW == 1234) && isJeff || (passW == 1111) && isPhill;
+            isValidPass = (passW == 1234) && isJeff || (passW == 1111) && isPhil;
 
         } catch (Exception e) {
             invalidUser.setVisible(true);
@@ -81,18 +79,19 @@ public class adminController {
 
         }
         
-        if(isJeff || isPhill){
+        if(isJeff || isPhil){
             System.out.println(username);
             invalidUser.setVisible(false);
             if(isValidPass) {
                 System.out.println(password);
                 invalidPass.setVisible(false);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("sscene2.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Body.fxml"));
                 root = loader.load();
     
-                SceneCont2 sceneCont2 = loader.getController();
+                BodyController sceneCont2 = loader.getController();
                 sceneCont2.displayName(username);
+                sceneCont2.displaySection();
     
                 // root = FXMLLoader.load(getClass().getResource("sscene2.fxml")); // use / to
                 // check outside
