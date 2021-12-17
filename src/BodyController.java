@@ -456,9 +456,22 @@ public class BodyController {
             System.out.println("Add");
             
             newDept = new Department(Integer.parseInt(tfId.getText()), tfDesc.getText());
-            obsDeptList.add(newDept);
-            departmentList.add(newDept);
-            initializeDept(obsDeptList);
+            Department deptCheck = new Department(newDept.getId());
+            if( !departmentList.contains(deptCheck)) {
+                obsDeptList.add(newDept);
+                departmentList.add(newDept);
+                initializeDept(obsDeptList);
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Primakey Key Constraint");
+                alert.setHeaderText("Department ID must be unique");
+                alert.setHeight(50);
+                alert.setWidth(80);
+                alert.showAndWait();
+                ExceptionHandling pkConstraint = new ExceptionHandling("Department ID must be unique");
+                System.out.println(pkConstraint.getMessage());
+            }
+            
           
         }
         if (event.getSource() == btnSearchDept) {
@@ -518,13 +531,21 @@ public class BodyController {
         addTeacher = new Teacher(Integer.parseInt(tfTeacherId.getText()) , tfTeacherName.getText(), Integer.parseInt(tfTeacherAge.getText()),
         tfTeacherAge.getText(), tfTeacherSpec.getText(), tfTeacherDeg.getText(), Integer.parseInt(tfTeacherFk.getText()));
         Department relation = new Department(addTeacher.getFkDeptID());
+        Teacher fkT = new Teacher(addTeacher.getId(), addTeacher.getFkDeptID()); // This fix the duplicate issue
        
-        if (departmentList.contains(relation)) {
+        if (departmentList.contains(relation) && !teacherList.contains(fkT)) {
             obsTeacherList.add(addTeacher);
             teacherList.add(addTeacher);
             initializeTeacher(obsTeacherList);
+
         } else {
-            ExceptionHandling fkConstraint = new ExceptionHandling("Department Does not Exist");
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Fk Constraint");
+            alert.setHeaderText("Department ID does not exist or duplicate ID");
+            alert.setHeight(50);
+            alert.setWidth(80);
+            alert.showAndWait();
+            ExceptionHandling fkConstraint = new ExceptionHandling("Department ID does not exist or duplicate ID");
             System.out.println(fkConstraint.getMessage());
            
         }

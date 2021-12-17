@@ -58,10 +58,14 @@ public class test {
         //     st.display();
         // }
 
-
+        
 
         Teacher t1 = new Teacher(123, "jeff", 29, "m", "coder", "master", 222);
+        Teacher t2 = new Teacher(2223, "fda", 29, "m", "coder", "master", 777);
+        teachList.add(t1);
+        teachList.add(t2);
         Department test = new Department(t1.getFkDeptID());
+        Teacher testFk = new Teacher(t1.getId() , t1.getFkDeptID());
         Department addDept1 = new Department(1001, "test", t1);
         Department addDept2 = new Department(222, "test", t1);
         Department addDept3 = new Department(333, "test", t1);
@@ -74,6 +78,16 @@ public class test {
 
         if (deptList.contains(test)){
             System.out.println("true");
+            if(teachList.contains(testFk)) {
+                System.out.printf("yes");
+            } else {
+                System.out.println("no");
+            }
+            // for(int i = 0; i < teachList.size(); i++){
+            //     if (teachList.get(i).getFkDeptID() == t1.getFkDeptID()) {
+            //         System.out.println("yes");
+            //     } 
+            // } 
         } else {
             System.out.println("false");
         }

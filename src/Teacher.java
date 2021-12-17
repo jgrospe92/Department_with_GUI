@@ -4,12 +4,7 @@ public class Teacher extends Person implements PayRoll{
     private double salary;
     private int fkDeptID;
    
-
-
      //Empty constructor
-     public Teacher(){
-        
-    }
     //Constructor
     // public Teacher(int id, String name, int age, String gender, String speciality, String degree) {
     //     super(id, name, age, gender);
@@ -26,8 +21,15 @@ public class Teacher extends Person implements PayRoll{
         
     }
     //Constructor for ID only
-    public Teacher(int id){
+   
+    public Teacher(int id, int fk){
         super(id);
+        this.fkDeptID = fk;
+    
+    }
+    // Constructor for FK
+    public Teacher(int fk) {
+        this.fkDeptID = fk;
     }
    
     
