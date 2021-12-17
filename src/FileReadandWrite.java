@@ -58,7 +58,8 @@ public class FileReadandWrite {
                     String gender = values[5];
                     String speciality = values[6];
                     String degree = values[7];
-                    Teacher deanTeacher = new Teacher(tId, name, age, gender, speciality, degree);
+                    int pk = Integer.parseInt(values[8]);
+                    Teacher deanTeacher = new Teacher(tId, name, age, gender, speciality, degree, pk);
                     teacherList.add(deanTeacher);
 
                     departmentList.add(new Department(id, description, deanTeacher)); // add to department
@@ -98,12 +99,13 @@ public class FileReadandWrite {
 
                         String speciality = values[4];
                         String degree = values[5];
+                        int pk = Integer.parseInt(values[6]);
                         int id = Integer.parseInt(values[0]);
                         String name = values[1];
                         int age = Integer.parseInt(values[2]);
                         String gender = values[3];
 
-                        importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree));
+                        importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
                         success++;
 
                     } else {
@@ -230,6 +232,32 @@ public class FileReadandWrite {
         String answer = input.next();
         return (answer.equals("y"));
     }
+    public void saveDepartment(ArrayList<Department> dd) {
+
+        String exportPath = "Data" + "/" + "Import" + "/" + "Department" + ".txt";
+        String fileContent = "";
+        try {
+            for (Department dept : dd) {
+                if (dept.getDean() != null) {
+                    fileContent = fileContent.concat(dept.formattedWithDean() + "\n");
+                } else {
+                    fileContent = fileContent.concat(dept.formattedWithoutDean() + "\n");
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+        try {
+            // Should i make the true into variable
+            FileWriter writer = new FileWriter(exportPath); // It will be written to this file
+            writer.write(fileContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void fileExportDepartment(String filneName, ArrayList<Department> dd) {
 
@@ -264,7 +292,7 @@ public class FileReadandWrite {
         String fileContent = "";
         try {
             for (Student student : ss) {
-                fileContent = fileContent.concat(student.formatted());
+                fileContent = fileContent.concat(student.formatted() + "\n");
             }
 
         } catch (Exception e) {
@@ -287,7 +315,7 @@ public class FileReadandWrite {
         String fileContent = "";
         try {
             for (Teacher teacher : tt) {
-                fileContent = fileContent.concat(teacher.formatted());
+                fileContent = fileContent.concat(teacher.formatted() + "\n");
             }
 
         } catch (Exception e) {
@@ -310,7 +338,7 @@ public class FileReadandWrite {
         String fileContent = "";
         try {
             for (Staff staff : st) {
-                fileContent = fileContent.concat(staff.formatted());
+                fileContent = fileContent.concat(staff.formatted() + "\n");
             }
 
         } catch (Exception e) {

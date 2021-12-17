@@ -22,26 +22,27 @@ public class test {
 
         fileImp.fileImportDepartment(filename, deptList, teachList);
 
-        deptList.get(1).setDean(new Teacher(123, "Jeff", 29, "male", "java","nothing"));
-        System.out.println(deptList.get(1).getDean().computePayRoll()); 
+        // deptList.get(1).setDean(new Teacher(123, "Jeff", 29, "male", "java","nothing"));
+        // System.out.println(deptList.get(1).getDean().computePayRoll()); 
 
-        System.out.println("End statement");
+        // System.out.println("End statement");
 
-        for(Department dd: deptList){
-            dd.showInfo();
-        }
+        // for(Department dd: deptList){
+        //     dd.showInfo();
+       // }
         // for (Teacher tt: teachList){
         //     tt.display();
         // }
 
-        // fileImp.fileExportDepartment("Dept", deptList);
+        fileImp.fileExportDepartment("Dept", deptList);
 
-        // String teacherFIle = "Teacher";
-        // fileImp.fileImportTeacher(teacherFIle, deptList, teachList);
+        String teacherFIle = "Teacher";
+        fileImp.fileImportTeacher(teacherFIle, deptList, teachList);
 
-        // for(Teacher tt: teachList){
-        //     tt.display();
-        // }
+        for(Teacher tt: teachList){
+            tt.display();
+        }
+        fileImp.fileExportTeacher("TeacExpo", teachList);
 
         // String studentFIle = "Student";
         // fileImp.fileImportStudent(studentFIle, deptList, studList);
@@ -49,6 +50,7 @@ public class test {
         // for(Student ss: studList){
         //     ss.display();
         // }
+        // fileImp.fileExportStudent("StudeExpoort", studList);
 
         // String staffFile = "Staff";
         // fileImp.fileImportStaff(staffFile, deptList, staffList);

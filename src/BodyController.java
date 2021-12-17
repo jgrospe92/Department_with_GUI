@@ -2,11 +2,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
@@ -14,6 +17,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -67,6 +71,9 @@ public class BodyController {
     
     @FXML
     private MenuItem menuLogout;
+
+    @FXML
+    private MenuItem menuSave;
     
     @FXML
     private MenuItem menuSearch;
@@ -99,6 +106,36 @@ public class BodyController {
     @FXML
     private TableView<Department> tvDept;
 
+    // Table view Dean
+
+    @FXML
+    private TableView<Teacher> tvDean;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanSpec;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanAge;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanID;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanName;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanDegree;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanGender;
+
+    @FXML 
+    private TableColumn<Teacher, Double> tblViewDeanSal;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanFK;
+    
+
     // Department Section
     @FXML
     private TextField tfDean;
@@ -127,13 +164,37 @@ public class BodyController {
 
     // ObservableList
     public static ObservableList<Department> obsDeptList = FXCollections.observableArrayList(departmentList);
-
+    public static ObservableList<Teacher> obsDeanList = FXCollections.observableArrayList();
     // Initialize Dept
     public void initializeBooks(ObservableList<Department> dept) {
         tblViewID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tblViewDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         tblViewDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
         tvDept.setItems(dept);
+
+    }
+
+    private ObservableList<Teacher> getDeanNow (){
+        for (int i = 0; i < obsDeptList.size(); i++) {
+            
+            if(obsDeptList.get(i).getDean() != null ) {
+                obsDeanList.add(obsDeptList.get(i).getDean());
+               
+            }
+       }
+       
+       return obsDeanList;
+    }
+    public void initializeDean(ObservableList<Teacher> teacher){
+       tblViewDeanID.setCellValueFactory(new PropertyValueFactory<>("id"));
+       tblViewDeanName.setCellValueFactory(new PropertyValueFactory<>("name"));
+       tblViewDeanAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+       tblViewDeanGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+       tblViewDeanSpec.setCellValueFactory(new PropertyValueFactory<>("speciality"));
+       tblViewDeanDegree.setCellValueFactory(new PropertyValueFactory<>("degree"));
+       tblViewDeanSal.setCellValueFactory(new PropertyValueFactory<>("salary"));
+       tblViewDeanFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
+       tvDean.setItems(teacher);      
     }
 
     private void showField(){
@@ -170,11 +231,36 @@ public class BodyController {
     public void tabAction(ActionEvent event){
 
         if (event.getSource() == menuLogout) {
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Logout");
+            alert.setHeaderText("You're about to logout!");
+            alert.setContentText("Would you like to save before existing?: ");
+            
+            ButtonType yesBtn = new ButtonType("Yes");
+            ButtonType noBtn = new ButtonType("No");
+
+            alert.getButtonTypes().setAll(noBtn, yesBtn);
+
+            if(alert.showAndWait().get() == yesBtn) {
+
+                FileReadandWrite saveDept = new FileReadandWrite();
+                saveDept.saveDepartment(new ArrayList<>(obsDeptList));
+                stage = (Stage) bodyPane.getScene().getWindow();
+                System.out.println("You are logout");
+                stage.close();
+            }else if (alert.showAndWait().get() == noBtn) {
+                stage = (Stage) bodyPane.getScene().getWindow();
+                System.out.println("You are logout");
+                stage.close();
+            }
            
-            stage = (Stage) bodyPane.getScene().getWindow();
-            System.out.println("You are logout");
-            stage.close();
-        } else if (event.getSource() == menuImpDept) {
+           
+        } else if (event.getSource() == menuSave) {
+            FileReadandWrite saveDept = new FileReadandWrite();
+            saveDept.saveDepartment(new ArrayList<>(obsDeptList));
+        } 
+        else if (event.getSource() == menuImpDept) {
             btnModify.setVisible(false);
             hideDeleteField();
             hideField();
@@ -182,6 +268,7 @@ public class BodyController {
             lblImport.setVisible(true);
             tftImportName.setVisible(true);
             btnSubmit.setVisible(true);
+            btnAddDept.setVisible(false);
             btnExport.setVisible(false);
 
         } else if (event.getSource() == menuExport)  {
@@ -213,6 +300,7 @@ public class BodyController {
         }
          else if (event.getSource() == menuAdd) {
             hideImport();
+            hideDeleteField();
             btnExport.setVisible(false);
             btnModify.setVisible(false);
             btnAddDept.setVisible(true);
@@ -222,6 +310,7 @@ public class BodyController {
             System.out.printf("update");
             hideImport();
             hideDeleteField();
+            hideField();
             btnAddDept.setVisible(false);
             btnModify.setVisible(true);
             tfDean.setVisible(false);
@@ -320,11 +409,15 @@ public class BodyController {
     public void displaySection(){
        
         lblSection.setText("Section: " + tabDepartment.getText());
+        obsDeanList.clear();
     
     }
 
     public void displaySectionDean(){
         lblSection.setText("Section: " + tabDean.getText());
+        initializeDean(getDeanNow());
+      
+        
 
     }
 
