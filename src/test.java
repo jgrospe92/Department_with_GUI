@@ -14,13 +14,13 @@ public class test {
 
         // import Test
 
-        FileReadandWrite fileImp = new FileReadandWrite();
+        // FileReadandWrite fileImp = new FileReadandWrite();
 
-        //System.out.println(fileImp.newFile()); 
+        // //System.out.println(fileImp.newFile()); 
 
-        String filename = "Department";
+        // String filename = "Department";
 
-        fileImp.fileImportDepartment(filename, deptList, teachList);
+        // fileImp.fileImportDepartment(filename, deptList, teachList);
 
         // deptList.get(1).setDean(new Teacher(123, "Jeff", 29, "male", "java","nothing"));
         // System.out.println(deptList.get(1).getDean().computePayRoll()); 
@@ -34,15 +34,15 @@ public class test {
         //     tt.display();
         // }
 
-        fileImp.fileExportDepartment("Dept", deptList);
+        // fileImp.fileExportDepartment("Dept", deptList);
 
-        String teacherFIle = "Teacher";
-        fileImp.fileImportTeacher(teacherFIle, deptList, teachList);
+        // String teacherFIle = "Teacher";
+        // fileImp.fileImportTeacher(teacherFIle, deptList, teachList);
 
-        for(Teacher tt: teachList){
-            tt.display();
-        }
-        fileImp.fileExportTeacher("TeacExpo", teachList);
+        // for(Teacher tt: teachList){
+        //     tt.display();
+        // }
+        // fileImp.fileExportTeacher("TeacExpo", teachList);
 
         // String studentFIle = "Student";
         // fileImp.fileImportStudent(studentFIle, deptList, studList);
@@ -60,23 +60,23 @@ public class test {
 
 
 
-        // Teacher t1 = new Teacher(123);
-
-        // Department addDept1 = new Department(1001, "test", t1);
-        // Department addDept2 = new Department(222, "test", t1);
-        // Department addDept3 = new Department(333, "test", t1);
-
-
-        // deptList.add(addDept1);
-        // deptList.add(addDept2);
-        // deptList.add(addDept3);
+        Teacher t1 = new Teacher(123, "jeff", 29, "m", "coder", "master", 222);
+        Department test = new Department(t1.getFkDeptID());
+        Department addDept1 = new Department(1001, "test", t1);
+        Department addDept2 = new Department(222, "test", t1);
+        Department addDept3 = new Department(333, "test", t1);
 
 
-        // if (deptList.contains(new Department(1001))){
-        //     System.out.println("true");
-        // } else {
-        //     System.out.println("false");
-        // }
+        deptList.add(addDept1);
+        deptList.add(addDept2);
+        deptList.add(addDept3);
+
+
+        if (deptList.contains(test)){
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
 
         
         // Student ss1 = new Student(123, "jeffrey", 21, "male", "pc", 1);

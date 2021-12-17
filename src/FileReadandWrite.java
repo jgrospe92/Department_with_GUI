@@ -109,7 +109,8 @@ public class FileReadandWrite {
                         success++;
 
                     } else {
-                        // raise an exception
+                        ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
+                        System.err.println(fkConstraint.getMessage());
                         corrupted++;
                     }
 

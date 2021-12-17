@@ -16,10 +16,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
+<AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
    <children>
-      <Label fx:id="labelWelcome" layoutX="9.0" layoutY="442.0" text="welcome," />
-      <Label fx:id="lblSection" layoutX="513.0" layoutY="443.0" text="section:" />
+      <Label fx:id="labelWelcome" layoutX="14.0" layoutY="451.0" text="welcome," />
+      <Label fx:id="lblSection" layoutX="706.0" layoutY="451.0" text="section:" />
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -39,6 +39,17 @@
                   <MenuItem fx:id="menuSearch" mnemonicParsing="false" onAction="#tabAction" text="search" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Teacher">
+               <items>
+                  <MenuItem fx:id="menuImpTeacher" mnemonicParsing="false" onAction="#tabAction" text="import" />
+                  <MenuItem fx:id="menuExportTeach" mnemonicParsing="false" onAction="#tabAction" text="export" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuTeacherAdd" mnemonicParsing="false" onAction="#tabAction" text="add" />
+                  <MenuItem fx:id="menuDelTeacher" mnemonicParsing="false" onAction="#tabAction" text="delete" />
+                  <MenuItem fx:id="menuUpdateTeach" mnemonicParsing="false" onAction="#tabAction" text="update" />
+                  <MenuItem fx:id="menuSearchTeach" mnemonicParsing="false" onAction="#tabAction" text="search" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
@@ -46,11 +57,11 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane fx:id="mainTabPane" layoutX="-3.0" layoutY="28.0" prefHeight="411.0" prefWidth="676.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainTabPane" layoutX="-3.0" layoutY="28.0" prefHeight="411.0" prefWidth="845.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabDepartment" onSelectionChanged="#displaySection" text="Department">
             <content>
-              <AnchorPane fx:id="searchDept" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="618.0">
+              <AnchorPane fx:id="searchDept" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="768.0">
                      <children>
                         <VBox layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="93.0">
                            <children>
@@ -95,7 +106,7 @@
                               <TextField fx:id="tfDean" promptText="enter dean ID" />
                            </children>
                         </VBox>
-                        <TableView fx:id="tvDept" layoutX="306.0" layoutY="11.0" prefHeight="265.0" prefWidth="368.0">
+                        <TableView fx:id="tvDept" layoutX="392.0" layoutY="12.0" prefHeight="265.0" prefWidth="368.0">
                           <columns>
                             <TableColumn fx:id="tblViewID" prefWidth="96.0" text="ID" />
                             <TableColumn fx:id="tblViewDesc" prefWidth="154.0" text="Description" />
@@ -124,11 +135,11 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="tabDean" onSelectionChanged="#displaySectionDean" text="Dean">
+          <Tab fx:id="tabDean" onSelectionChanged="#tabSwitchAction" text="Dean">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tvDean" layoutX="7.0" layoutY="21.0" prefHeight="282.0" prefWidth="666.0">
+                        <TableView fx:id="tvDean" layoutX="81.0" layoutY="24.0" prefHeight="338.0" prefWidth="683.0">
                           <columns>
                             <TableColumn fx:id="tblViewDeanID" prefWidth="60.0" text="ID" />
                             <TableColumn fx:id="tblViewDeanName" prefWidth="77.0" text="Name" />
@@ -136,13 +147,136 @@
                               <TableColumn fx:id="tblViewDeanGender" minWidth="0.0" prefWidth="58.0" text="Gender" />
                               <TableColumn fx:id="tblViewDeanSpec" prefWidth="149.0" text="Speciality" />
                               <TableColumn fx:id="tblViewDeanDegree" minWidth="4.0" prefWidth="103.0" text="Degree" />
-                              <TableColumn fx:id="tblViewDeanSal" prefWidth="91.0" text="Salary" />
-                              <TableColumn fx:id="tblViewDeanFK" prefWidth="62.0" text="FK" />
+                              <TableColumn fx:id="tblViewDeanSal" prefWidth="95.0" text="Salary" />
+                              <TableColumn fx:id="tblViewDeanFK" prefWidth="75.0" text="FK" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="tabTeacher" onSelectionChanged="#tabSwitchAction" text="Teacher">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvTeacher" layoutX="237.0" layoutY="7.0" prefHeight="282.0" prefWidth="608.0">
+                           <columns>
+                              <TableColumn fx:id="tblViewDeanID1" prefWidth="60.0" text="ID" />
+                              <TableColumn fx:id="tblViewDeanName1" prefWidth="77.0" text="Name" />
+                              <TableColumn fx:id="tblViewDeanAge1" prefWidth="65.0" text="Age" />
+                              <TableColumn fx:id="tblViewDeanGender1" minWidth="0.0" prefWidth="58.0" text="Gender" />
+                              <TableColumn fx:id="tblViewDeanSpec1" prefWidth="149.0" text="Speciality" />
+                              <TableColumn fx:id="tblViewDeanDegree1" minWidth="4.0" prefWidth="103.0" text="Degree" />
+                              <TableColumn fx:id="tblViewDeanSal1" prefWidth="95.0" text="Salary" />
+                              <TableColumn fx:id="tblViewDeanFK1" prefWidth="75.0" text="FK" />
+                           </columns>
+                        </TableView>
+                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="284.0" prefWidth="63.0">
+                           <children>
+                              <Label text="ID:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Name:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="47.0" text="Age:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="84.0" text="Gender:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="121.0" text="Speciality">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="158.0" text="Degree">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="195.0" text="FK">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="77.0" layoutY="7.0" prefHeight="258.0" prefWidth="126.0">
+                           <children>
+                              <TextField fx:id="tfTeacherId" promptText="enter ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherName" layoutX="10.0" layoutY="10.0" promptText="enter name">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherAge" layoutX="10.0" layoutY="48.0" promptText="enter age">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherGender" layoutX="10.0" layoutY="86.0" promptText="male or female">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherSpec" layoutX="10.0" layoutY="124.0" promptText="enter speciality">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherDeg" layoutX="10.0" layoutY="162.0" promptText="PhD/Master/bachelor">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherFk" layoutX="10.0" layoutY="200.0" promptText="enter dept ID" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnAddTeach" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblImportTeach" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImpTeach" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImpoTeach" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

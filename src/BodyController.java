@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -93,6 +95,9 @@ public class BodyController {
     @FXML
     private Tab tabDepartment;
 
+    @FXML
+    private Tab tabTeacher;
+
     // Table view for Department
     @FXML
     private TableColumn<Department, String> tblViewDean;
@@ -110,7 +115,7 @@ public class BodyController {
 
     @FXML
     private TableView<Teacher> tvDean;
-
+    // Dean and Teacher  table column 
     @FXML
     private TableColumn<Teacher, String> tblViewDeanSpec;
 
@@ -152,6 +157,85 @@ public class BodyController {
     @FXML
     private TextField tftSearchDept;
 
+    // Teacher Section
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanSpec1;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanAge1;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanID1;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanName1;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanDegree1;
+
+    @FXML
+    private TableColumn<Teacher, String> tblViewDeanGender1;
+
+    @FXML 
+    private TableColumn<Teacher, Double> tblViewDeanSal1;
+
+    @FXML
+    private TableColumn<Teacher, Integer> tblViewDeanFK1;
+
+    @FXML
+    private Button btnAddTeach;
+
+    @FXML
+    private MenuItem menuImpTeacher;
+
+    @FXML
+    private Label lblImportTeach;
+
+    @FXML
+    private TextField tfImpTeach;
+
+    @FXML
+    private Button btnImpoTeach;
+
+    @FXML
+    private MenuItem menuExportTeach;
+
+    @FXML
+    private MenuItem menuTeacherAdd;
+
+    @FXML
+    private MenuItem menuDelTeacher;
+
+    @FXML
+    private MenuItem menuUpdateTeach;
+
+    @FXML
+    private MenuItem menuSearchTeach;
+
+    @FXML
+    private TableView<Teacher> tvTeacher;
+
+    @FXML
+    private TextField tfTeacherAge;
+
+    @FXML
+    private TextField tfTeacherDeg;
+
+    @FXML
+    private TextField tfTeacherFk;
+
+    @FXML
+    private TextField tfTeacherGender;
+
+    @FXML
+    private TextField tfTeacherId;
+
+    @FXML
+    private TextField tfTeacherName;
+
+    @FXML
+    private TextField tfTeacherSpec;
+
     
 
     Stage stage;
@@ -163,10 +247,12 @@ public class BodyController {
     public static ArrayList<Staff> StaffList = new ArrayList<>();
 
     // ObservableList
-    public static ObservableList<Department> obsDeptList = FXCollections.observableArrayList(departmentList);
+    public static ObservableList<Department> obsDeptList = FXCollections.observableArrayList(/*departmentList*/);
     public static ObservableList<Teacher> obsDeanList = FXCollections.observableArrayList();
+    public static ObservableList<Teacher> obsTeacherList = FXCollections.observableArrayList(/*teacherList*/);
+
     // Initialize Dept
-    public void initializeBooks(ObservableList<Department> dept) {
+    public void initializeDept(ObservableList<Department> dept) {
         tblViewID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tblViewDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         tblViewDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
@@ -179,7 +265,7 @@ public class BodyController {
             
             if(obsDeptList.get(i).getDean() != null ) {
                 obsDeanList.add(obsDeptList.get(i).getDean());
-               
+                obsTeacherList.add(obsDeptList.get(i).getDean());
             }
        }
        
@@ -194,7 +280,8 @@ public class BodyController {
        tblViewDeanDegree.setCellValueFactory(new PropertyValueFactory<>("degree"));
        tblViewDeanSal.setCellValueFactory(new PropertyValueFactory<>("salary"));
        tblViewDeanFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
-       tvDean.setItems(teacher);      
+       tvDean.setItems(teacher);
+           
     }
 
     private void showField(){
@@ -226,6 +313,16 @@ public class BodyController {
         lblImport.setVisible(false);
         tftImportName.setVisible(false);
         btnSubmit.setVisible(false);
+    }
+    private void hideImportTeacher(){
+        lblImportTeach.setVisible(false);
+        tfImpTeach.setVisible(false);
+        btnImpoTeach.setVisible(false);
+    }
+    private void showImportTeacher(){
+        lblImportTeach.setVisible(true);
+        tfImpTeach.setVisible(true);
+        btnImpoTeach.setVisible(true);
     }
 
     public void tabAction(ActionEvent event){
@@ -259,6 +356,8 @@ public class BodyController {
         } else if (event.getSource() == menuSave) {
             FileReadandWrite saveDept = new FileReadandWrite();
             saveDept.saveDepartment(new ArrayList<>(obsDeptList));
+            // Save option for Teacher, Student and Staff
+            // Create save method inside FileReadandWrite class
         } 
         else if (event.getSource() == menuImpDept) {
             btnModify.setVisible(false);
@@ -317,6 +416,12 @@ public class BodyController {
             lblDean.setVisible(false);
             btnExport.setVisible(false);
 
+        } else if (event.getSource() == menuTeacherAdd) {
+            btnAddTeach.setVisible(true);
+            hideImportTeacher();
+        } else if (event.getSource() == menuImpTeacher) {
+            btnAddTeach.setVisible(false);
+            showImportTeacher();
         }
  
     }
@@ -329,9 +434,9 @@ public class BodyController {
             
             obsDeptList = FXCollections.observableArrayList(departmentList);
 
-            //System.out.println("obs");
-            //obsDeptList.get(0).showInfo();
-            initializeBooks(obsDeptList);
+            initializeDean(getDeanNow());
+
+            initializeDept(obsDeptList);
             lblImport.setVisible(false);
             tftImportName.setVisible(false);
             btnSubmit.setVisible(false);
@@ -344,6 +449,7 @@ public class BodyController {
             lblImport.setVisible(false);
             tftImportName.setVisible(false);
             btnExport.setVisible(false);
+           
         }
         if (event.getSource() == btnAddDept) {
             Department newDept;
@@ -351,8 +457,8 @@ public class BodyController {
             
             newDept = new Department(Integer.parseInt(tfId.getText()), tfDesc.getText());
             obsDeptList.add(newDept);
-            initializeBooks(obsDeptList);
-            
+            departmentList.add(newDept);
+            initializeDept(obsDeptList);
           
         }
         if (event.getSource() == btnSearchDept) {
@@ -380,7 +486,51 @@ public class BodyController {
                 }
             }
         }
+        // Teacher Button Event
+
+        if (event.getSource() == btnAddTeach) {
+            addBtnTeacher();
+           btnAddTeach.setVisible(false);
+        }
+        if (event.getSource() == btnImpoTeach) {
+            FileReadandWrite importTeacher = new FileReadandWrite();
+            String filename = tfImpTeach.getText();
+            importTeacher.fileImportTeacher(filename, departmentList, teacherList);
+            obsTeacherList = FXCollections.observableArrayList(teacherList);
+            initializeTeacher(obsTeacherList);
+        }
     }
+    private void initializeTeacher(ObservableList<Teacher> teacher){
+
+        tblViewDeanID1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblViewDeanName1.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblViewDeanAge1.setCellValueFactory(new PropertyValueFactory<>("age"));
+        tblViewDeanGender1.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        tblViewDeanSpec1.setCellValueFactory(new PropertyValueFactory<>("speciality"));
+        tblViewDeanDegree1.setCellValueFactory(new PropertyValueFactory<>("degree"));
+        tblViewDeanSal1.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        tblViewDeanFK1.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
+        tvTeacher.setItems(teacher); 
+    }
+    private void addBtnTeacher(){
+        Teacher addTeacher;
+   
+        addTeacher = new Teacher(Integer.parseInt(tfTeacherId.getText()) , tfTeacherName.getText(), Integer.parseInt(tfTeacherAge.getText()),
+        tfTeacherAge.getText(), tfTeacherSpec.getText(), tfTeacherDeg.getText(), Integer.parseInt(tfTeacherFk.getText()));
+        Department relation = new Department(addTeacher.getFkDeptID());
+       
+        if (departmentList.contains(relation)) {
+            obsTeacherList.add(addTeacher);
+            teacherList.add(addTeacher);
+            initializeTeacher(obsTeacherList);
+        } else {
+            ExceptionHandling fkConstraint = new ExceptionHandling("Department Does not Exist");
+            System.out.println(fkConstraint.getMessage());
+           
+        }
+        
+    }
+
     // Iterator Method
     private void searchItem(){
         Department currentDept = new Department();
@@ -409,17 +559,37 @@ public class BodyController {
     public void displaySection(){
        
         lblSection.setText("Section: " + tabDepartment.getText());
-        obsDeanList.clear();
+        
     
     }
 
     public void displaySectionDean(){
         lblSection.setText("Section: " + tabDean.getText());
-        initializeDean(getDeanNow());
-      
         
-
     }
 
+    public void tabSwitchAction(Event event) {
+       
+        if( event.getSource() == tabTeacher) {
+           
+            lblSection.setText("Section: " + tabTeacher.getText());
+            if (!obsTeacherList.contains(obsTeacherList)) {
+                initializeTeacher(obsTeacherList);
+            }
+            
+            
+        }
+        if (event.getSource() == tabDean) {
+            lblSection.setText("Section: " + tabDean.getText());
+           
+          
+        }
+        if (event.getSource() == tabDepartment) {
+            lblSection.setText("Section: " + tabDepartment.getText());
+            
+        }
+      
+      
+    }
 
 }
