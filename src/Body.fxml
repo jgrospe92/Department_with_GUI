@@ -300,6 +300,13 @@
                         <TextField fx:id="tfSearchTeacher" layoutX="69.0" layoutY="319.0" promptText="enter Teacher ID" visible="false" />
                         <Button fx:id="btnSearchTeacher" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
                         <Button fx:id="btnUpdateTeacher" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblDelTeacher" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelTeacher" layoutX="69.0" layoutY="299.0" promptText="enter Teacher Id" visible="false" />
+                        <Button fx:id="btnDelTeacher" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
                      </children>
                   </AnchorPane>
               </content>

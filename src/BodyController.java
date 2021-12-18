@@ -262,7 +262,15 @@ public class BodyController {
     // Update
     @FXML
     private Button btnUpdateTeacher;
+    // Delete
+    @FXML
+    private Label lblDelTeacher;
 
+    @FXML
+    private TextField tfDelTeacher;
+
+    @FXML
+    private Button btnDelTeacher;
     
 
     Stage stage;
@@ -375,6 +383,16 @@ public class BodyController {
         lblTempSal.setVisible(false);
         tfTempSal.setVisible(false);
     }
+    private void showDelTeacher(){
+        lblDelTeacher.setVisible(true);
+        tfDelTeacher.setVisible(true);
+        btnDelTeacher.setVisible(true);
+    }
+    private void hideDelTeacher(){
+        lblDelTeacher.setVisible(false);
+        tfDelTeacher.setVisible(false);
+        btnDelTeacher.setVisible(false);
+    }
 
     public void tabAction(ActionEvent event){
 
@@ -458,6 +476,7 @@ public class BodyController {
             btnAddDept.setVisible(true);
             tfDean.setVisible(true);
             lblDean.setVisible(true);
+            
         } else if (event.getSource() == menuUpdate) {
             System.out.printf("update");
             hideImport();
@@ -468,21 +487,21 @@ public class BodyController {
             tfDean.setVisible(false);
             lblDean.setVisible(false);
             btnExport.setVisible(false);
-
+          
         } else if (event.getSource() == menuTeacherAdd) {
             btnAddTeach.setVisible(true);
             hideImportTeacher();
             hideExportTeacher();
             hideSearchTeacher();
             btnUpdateTeacher.setVisible(false);
-
+            hideDelTeacher();
         } else if (event.getSource() == menuImpTeacher) {
             btnAddTeach.setVisible(false);
             showImportTeacher();
             hideSearchTeacher();
             hideExportTeacher();
             btnUpdateTeacher.setVisible(false);
-            
+            hideDelTeacher();
 
         } else if (event.getSource() == menuExportTeach ) {
             showExportTeacher();
@@ -490,14 +509,14 @@ public class BodyController {
             hideImportTeacher();
             btnAddTeach.setVisible(false);
             btnUpdateTeacher.setVisible(false);
-
+            hideDelTeacher();
         } else if (event.getSource() == menuSearchTeach) {
             showSearchTeacher();
             hideExportTeacher();
             hideImportTeacher();
             btnAddTeach.setVisible(false);
             btnUpdateTeacher.setVisible(false);
-
+            hideDelTeacher();
         } else if (event.getSource() == menuUpdateTeach) {
             btnUpdateTeacher.setVisible(true);
             showSearchTeacher();
@@ -505,6 +524,15 @@ public class BodyController {
             hideImportTeacher();
             btnAddTeach.setVisible(false);
             hideSearchTeacher();
+            hideDelTeacher();
+        } else if (event.getSource() == menuDelTeacher) {
+            btnUpdateTeacher.setVisible(false);
+            showSearchTeacher();
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            showDelTeacher();
         }
             
         
@@ -612,15 +640,15 @@ public class BodyController {
             String spec = tfTeacherSpec.getText();
             String degree = tfTeacherDeg.getText();
             int fk = Integer.parseInt(tfTeacherFk.getText());
-            //Teacher updateTeacher = new Teacher(id, name, age, gender,spec,degree,fk);
-            Teacher updateTeacher = new Teacher();
-            updateTeacher.setId(id);
-            updateTeacher.setName(name);
-            updateTeacher.setAge(age);
-            updateTeacher.setGender(gender);
-            updateTeacher.setSpeciality(spec);
-            updateTeacher.setDegree(degree);
-            updateTeacher.setFK(fk);
+            Teacher updateTeacher = new Teacher(id, name, age, gender,spec,degree,fk);
+            //Teacher updateTeacher = new Teacher();
+            // updateTeacher.setId(id);
+            // updateTeacher.setName(name);
+            // updateTeacher.setAge(age);
+            // updateTeacher.setGender(gender);
+            // updateTeacher.setSpeciality(spec);
+            // updateTeacher.setDegree(degree);
+            // updateTeacher.setFK(fk);
             
             Department relation = new Department(updateTeacher.getFkDeptID());
             if (departmentList.contains(relation)){
@@ -634,7 +662,16 @@ public class BodyController {
                 PKDoesNotExist();
             }
 
-
+        }
+        if (event.getSource() == btnDelTeacher) {
+            System.out.printf("delete");
+            for (int i = 0; i < obsTeacherList.size(); i++) {
+                if (obsTeacherList.get(i).getId() == Integer.parseInt(tfDelTeacher.getText())){
+                    obsTeacherList.remove(i);
+                }
+            }
+            hideDelTeacher();
+            tfDelTeacher.clear();
         }
     }
     private void primaryKeyConstraint(){
