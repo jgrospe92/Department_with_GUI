@@ -45,8 +45,14 @@ public class FileReadandWrite {
 
                     int id = Integer.parseInt(values[0]);
                     String description = values[1];
-                    departmentList.add(new Department(id, description));
-                    success++;
+                    Department deptIdPk = new Department(id);
+                    if (!departmentList.contains(deptIdPk)) {
+                        departmentList.add(new Department(id, description));
+                        success++;
+                    } else {
+                        corrupted++;
+                    }
+                    
                 } else if (values.length == 9) {
 
                     int id = Integer.parseInt(values[0]);
@@ -59,11 +65,18 @@ public class FileReadandWrite {
                     String speciality = values[6];
                     String degree = values[7];
                     int pk = Integer.parseInt(values[8]);
-                    Teacher deanTeacher = new Teacher(tId, name, age, gender, speciality, degree, pk);
-                    teacherList.add(deanTeacher);
+                    
+                    Department deptIdPk = new Department(id);
 
-                    departmentList.add(new Department(id, description, deanTeacher)); // add to department
-                    success++;
+                    if (!departmentList.contains(deptIdPk)) {
+                        Teacher deanTeacher = new Teacher(tId, name, age, gender, speciality, degree, pk);
+                        teacherList.add(deanTeacher);
+                        departmentList.add(new Department(id, description, deanTeacher)); // add to department
+
+                        success++;
+                    } else {
+                        corrupted++;
+                    }
                 } else {
                     corrupted++;
                     // raise an exception
@@ -93,7 +106,7 @@ public class FileReadandWrite {
 
                 if (values.length == 7) {
 
-                    int tempId = Integer.parseInt(values[values.length - 1]);
+                    int tempId = Integer.parseInt(values[6]);
 
                     if (isValid(departmentList, tempId)) {
 
@@ -105,9 +118,19 @@ public class FileReadandWrite {
                         int age = Integer.parseInt(values[2]);
                         String gender = values[3];
 
-                        importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
-                        success++;
-
+                        Teacher fkCheck = new Teacher(id, pk);
+                        Teacher uniqueFK = new Teacher(pk);
+                        if (!importTeacherList.contains(fkCheck)) {
+                            if (!importTeacherList.contains(uniqueFK)) {
+                                importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
+                                success++;
+                            }
+                            
+                        } else {
+                            corrupted++;
+                        }
+                       
+                        
                     } else {
                         ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
                         System.err.println(fkConstraint.getMessage());
@@ -158,8 +181,10 @@ public class FileReadandWrite {
                         success++;
 
                     } else {
+                        ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
+                        System.err.println(fkConstraint.getMessage());
                         corrupted++;
-                        // raise an exception
+                        
                     }
 
                 } else {
@@ -203,12 +228,13 @@ public class FileReadandWrite {
                         String course = values[4];
                         int semester = Integer.parseInt(values[5]);
 
-                        importStudentList.add(new Student(id, name, age, gender, course, semester));
+                        importStudentList.add(new Student(id, name, age, gender, course, semester)); // add FK
                         success++;
 
                     } else {
                         corrupted++;
-                        // raise an exception
+                        ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
+                        System.err.println(fkConstraint.getMessage());
                     }
 
                 } else {
@@ -227,12 +253,12 @@ public class FileReadandWrite {
 
     // Method to Write to a file
     // Method to evaluate if user wants to create a new file
-    public boolean newFile() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Would you like to create a new file? (y,n)");
-        String answer = input.next();
-        return (answer.equals("y"));
-    }
+    // public boolean newFile() {
+    //     Scanner input = new Scanner(System.in);
+    //     System.out.println("Would you like to create a new file? (y,n)");
+    //     String answer = input.next();
+    //     return (answer.equals("y"));
+    // }
     public void saveDepartment(ArrayList<Department> dd) {
 
         String exportPath = "Data" + "/" + "Import" + "/" + "Department" + ".txt";
@@ -249,6 +275,26 @@ public class FileReadandWrite {
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
+        }
+        try {
+            // Should i make the true into variable
+            FileWriter writer = new FileWriter(exportPath); // It will be written to this file
+            writer.write(fileContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveTeacher(ArrayList<Teacher> tt){
+        String exportPath = "Data" + "/" + "Import" + "/" + "Teacher" + ".txt";
+        String fileContent = "";
+        try {
+            for (Teacher teacher : tt) {
+                fileContent = fileContent.concat(teacher.formatted() + "\n");  
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         try {
             // Should i make the true into variable

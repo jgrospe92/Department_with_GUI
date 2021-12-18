@@ -235,6 +235,33 @@ public class BodyController {
 
     @FXML
     private TextField tfTeacherSpec;
+    // Export
+    @FXML
+    private Label lblExportTeacher;
+
+    @FXML
+    private TextField tfExportTeacher;
+
+    @FXML
+    private Button btnExportTeacher;
+    // Search
+    @FXML
+    private Label lblSearchTeacher;
+
+    @FXML
+    private TextField tfSearchTeacher;
+
+    @FXML
+    private Button btnSearchTeacher;
+
+    @FXML
+    private Label lblTempSal;
+
+    @FXML
+    private TextField tfTempSal;
+    // Update
+    @FXML
+    private Button btnUpdateTeacher;
 
     
 
@@ -324,6 +351,30 @@ public class BodyController {
         tfImpTeach.setVisible(true);
         btnImpoTeach.setVisible(true);
     }
+    private void showExportTeacher(){
+        lblExportTeacher.setVisible(true);
+        tfExportTeacher.setVisible(true);
+        btnExportTeacher.setVisible(true);
+    }
+    private void hideExportTeacher(){
+        lblExportTeacher.setVisible(false);
+        tfExportTeacher.setVisible(false);
+        btnExportTeacher.setVisible(false);
+    }
+    private void showSearchTeacher(){
+        lblSearchTeacher.setVisible(true);
+        tfSearchTeacher.setVisible(true);
+        btnSearchTeacher.setVisible(true);
+        lblTempSal.setVisible(true);
+        tfTempSal.setVisible(true);
+    }
+    private void hideSearchTeacher(){
+        lblSearchTeacher.setVisible(false);
+        tfSearchTeacher.setVisible(false);
+        btnSearchTeacher.setVisible(false);
+        lblTempSal.setVisible(false);
+        tfTempSal.setVisible(false);
+    }
 
     public void tabAction(ActionEvent event){
 
@@ -341,8 +392,9 @@ public class BodyController {
 
             if(alert.showAndWait().get() == yesBtn) {
 
-                FileReadandWrite saveDept = new FileReadandWrite();
-                saveDept.saveDepartment(new ArrayList<>(obsDeptList));
+                FileReadandWrite saveData = new FileReadandWrite();
+                saveData.saveDepartment(new ArrayList<>(obsDeptList));
+                saveData.saveTeacher(new ArrayList<>(obsTeacherList));
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
@@ -354,8 +406,9 @@ public class BodyController {
            
            
         } else if (event.getSource() == menuSave) {
-            FileReadandWrite saveDept = new FileReadandWrite();
-            saveDept.saveDepartment(new ArrayList<>(obsDeptList));
+            FileReadandWrite saveData = new FileReadandWrite();
+            saveData.saveDepartment(new ArrayList<>(obsDeptList));
+            saveData.saveTeacher(new ArrayList<>(obsTeacherList));
             // Save option for Teacher, Student and Staff
             // Create save method inside FileReadandWrite class
         } 
@@ -419,10 +472,42 @@ public class BodyController {
         } else if (event.getSource() == menuTeacherAdd) {
             btnAddTeach.setVisible(true);
             hideImportTeacher();
+            hideExportTeacher();
+            hideSearchTeacher();
+            btnUpdateTeacher.setVisible(false);
+
         } else if (event.getSource() == menuImpTeacher) {
             btnAddTeach.setVisible(false);
             showImportTeacher();
+            hideSearchTeacher();
+            hideExportTeacher();
+            btnUpdateTeacher.setVisible(false);
+            
+
+        } else if (event.getSource() == menuExportTeach ) {
+            showExportTeacher();
+            hideSearchTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            btnUpdateTeacher.setVisible(false);
+
+        } else if (event.getSource() == menuSearchTeach) {
+            showSearchTeacher();
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            btnUpdateTeacher.setVisible(false);
+
+        } else if (event.getSource() == menuUpdateTeach) {
+            btnUpdateTeacher.setVisible(true);
+            showSearchTeacher();
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
         }
+            
+        
  
     }
     public void btnAction(ActionEvent event) {
@@ -462,14 +547,7 @@ public class BodyController {
                 departmentList.add(newDept);
                 initializeDept(obsDeptList);
             } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Primakey Key Constraint");
-                alert.setHeaderText("Department ID must be unique");
-                alert.setHeight(50);
-                alert.setWidth(80);
-                alert.showAndWait();
-                ExceptionHandling pkConstraint = new ExceptionHandling("Department ID must be unique");
-                System.out.println(pkConstraint.getMessage());
+                primaryKeyConstraint();
             }
             
           
@@ -511,7 +589,84 @@ public class BodyController {
             importTeacher.fileImportTeacher(filename, departmentList, teacherList);
             obsTeacherList = FXCollections.observableArrayList(teacherList);
             initializeTeacher(obsTeacherList);
+            hideImportTeacher();
         }
+        if (event.getSource() == btnExportTeacher) {
+            System.out.println("export Teacher");
+            FileReadandWrite exportTeacher = new FileReadandWrite();
+            String filename = tfExportTeacher.getText();
+            exportTeacher.fileExportTeacher(filename, new ArrayList<>(obsTeacherList));
+            hideExportTeacher();
+        }
+        if (event.getSource() == btnSearchTeacher) {
+            searchTeacher();
+            System.out.println("search...");
+            
+        }
+        if (event.getSource() == btnUpdateTeacher) {
+            System.out.println("update");
+            int id = Integer.parseInt(tfTeacherId.getText());
+            String name =  tfTeacherName.getText();
+            int age = Integer.parseInt(tfTeacherAge.getText());
+            String gender = tfTeacherGender.getText();
+            String spec = tfTeacherSpec.getText();
+            String degree = tfTeacherDeg.getText();
+            int fk = Integer.parseInt(tfTeacherFk.getText());
+            //Teacher updateTeacher = new Teacher(id, name, age, gender,spec,degree,fk);
+            Teacher updateTeacher = new Teacher();
+            updateTeacher.setId(id);
+            updateTeacher.setName(name);
+            updateTeacher.setAge(age);
+            updateTeacher.setGender(gender);
+            updateTeacher.setSpeciality(spec);
+            updateTeacher.setDegree(degree);
+            updateTeacher.setFK(fk);
+            
+            Department relation = new Department(updateTeacher.getFkDeptID());
+            if (departmentList.contains(relation)){
+
+                for (int i = 0 ; i < obsTeacherList.size(); i++) {
+                    if(obsTeacherList.get(i).getId() == id) {
+                        obsTeacherList.set(i,updateTeacher);
+                    }
+                }
+            } else {
+                PKDoesNotExist();
+            }
+
+
+        }
+    }
+    private void primaryKeyConstraint(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Primary Key Constraint");
+        alert.setHeaderText("Department ID must be unique");
+        alert.setHeight(50);
+        alert.setWidth(80);
+        alert.showAndWait();
+        ExceptionHandling pkConstraint = new ExceptionHandling("Department ID must be unique");
+        System.out.println(pkConstraint.getMessage());
+    }
+    private void searchTeacher(){
+        Teacher currentTeacher = new Teacher();
+        Iterator<Teacher> iterator = obsTeacherList.iterator();
+
+        while(iterator.hasNext()) {
+            currentTeacher = iterator.next();
+            if (currentTeacher.getId() == Integer.parseInt(tfSearchTeacher.getText())){
+
+                tfTeacherId.setText(Integer.toString(currentTeacher.getId()));
+                tfTeacherName.setText(currentTeacher.getName());
+                tfTeacherAge.setText(Integer.toString(currentTeacher.getAge()));
+                tfTeacherGender.setText(currentTeacher.getGender());
+                tfTeacherSpec.setText(currentTeacher.getSpeciality());
+                tfTeacherDeg.setText(currentTeacher.getDegree());
+                tfTeacherFk.setText(Integer.toString(currentTeacher.getFkDeptID()));
+                tfTempSal.setText(Double.toString(currentTeacher.getSalary()));
+
+            }
+        }
+
     }
     private void initializeTeacher(ObservableList<Teacher> teacher){
 
@@ -525,13 +680,23 @@ public class BodyController {
         tblViewDeanFK1.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
         tvTeacher.setItems(teacher); 
     }
+    private void PKDoesNotExist(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Fk Constraint");
+        alert.setHeaderText("Department ID does not exist or duplicate ID");
+        alert.setHeight(50);
+        alert.setWidth(80);
+        alert.showAndWait();
+        ExceptionHandling fkConstraint = new ExceptionHandling("Department ID does not exist or duplicate ID");
+        System.out.println(fkConstraint.getMessage());
+    }
     private void addBtnTeacher(){
         Teacher addTeacher;
    
         addTeacher = new Teacher(Integer.parseInt(tfTeacherId.getText()) , tfTeacherName.getText(), Integer.parseInt(tfTeacherAge.getText()),
         tfTeacherAge.getText(), tfTeacherSpec.getText(), tfTeacherDeg.getText(), Integer.parseInt(tfTeacherFk.getText()));
         Department relation = new Department(addTeacher.getFkDeptID());
-        Teacher fkT = new Teacher(addTeacher.getId(), addTeacher.getFkDeptID()); // This fix the duplicate issue
+        Teacher fkT = new Teacher(addTeacher.getFkDeptID()); // This fix the duplicate issue
        
         if (departmentList.contains(relation) && !teacherList.contains(fkT)) {
             obsTeacherList.add(addTeacher);
@@ -539,17 +704,9 @@ public class BodyController {
             initializeTeacher(obsTeacherList);
 
         } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Fk Constraint");
-            alert.setHeaderText("Department ID does not exist or duplicate ID");
-            alert.setHeight(50);
-            alert.setWidth(80);
-            alert.showAndWait();
-            ExceptionHandling fkConstraint = new ExceptionHandling("Department ID does not exist or duplicate ID");
-            System.out.println(fkConstraint.getMessage());
+            PKDoesNotExist();
            
         }
-        
     }
 
     // Iterator Method

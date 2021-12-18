@@ -5,6 +5,9 @@ public class Teacher extends Person implements PayRoll{
     private int fkDeptID;
    
      //Empty constructor
+     public Teacher(){
+
+     }
     //Constructor
     // public Teacher(int id, String name, int age, String gender, String speciality, String degree) {
     //     super(id, name, age, gender);
@@ -42,6 +45,9 @@ public class Teacher extends Person implements PayRoll{
     public void setDegree(String degree) {
         this.degree = degree;
     }
+    public void setFK(int fk) {
+        this.fkDeptID = fk;
+    }
 
     //Getters
     public String getSpeciality() {
@@ -78,11 +84,12 @@ public class Teacher extends Person implements PayRoll{
         if (obj!=null) {
             if (obj.getClass()==this.getClass()) {
                 Teacher teacher = (Teacher) obj;
-                return (teacher.getId() == this.getId());
+                return (teacher.getFkDeptID() == this.getFkDeptID());
             }
         }
         return true;
     }
+    
     @Override
     public double computePayRoll() {
        String phd = this.degree.toLowerCase();

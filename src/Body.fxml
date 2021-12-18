@@ -170,7 +170,7 @@
                               <TableColumn fx:id="tblViewDeanFK1" prefWidth="75.0" text="FK" />
                            </columns>
                         </TableView>
-                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="284.0" prefWidth="63.0">
+                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="296.0" prefWidth="63.0">
                            <children>
                               <Label text="ID:">
                                  <padding>
@@ -228,9 +228,17 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
+                              <Label fx:id="lblTempSal" layoutX="10.0" layoutY="238.0" text="Salary" visible="false">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
-                        <VBox layoutX="77.0" layoutY="7.0" prefHeight="258.0" prefWidth="126.0">
+                        <VBox layoutX="77.0" layoutY="7.0" prefHeight="309.0" prefWidth="126.0">
                            <children>
                               <TextField fx:id="tfTeacherId" promptText="enter ID">
                                  <VBox.margin>
@@ -262,7 +270,11 @@
                                     <Insets bottom="12.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="tfTeacherFk" layoutX="10.0" layoutY="200.0" promptText="enter dept ID" />
+                              <TextField fx:id="tfTeacherFk" layoutX="10.0" layoutY="200.0" promptText="enter dept ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin></TextField>
+                              <TextField fx:id="tfTempSal" layoutX="10.0" layoutY="238.0" visible="false" />
                            </children>
                         </VBox>
                         <Button fx:id="btnAddTeach" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
@@ -273,6 +285,21 @@
                         </Label>
                         <TextField fx:id="tfImpTeach" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
                         <Button fx:id="btnImpoTeach" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExportTeacher" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExportTeacher" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExportTeacher" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Label fx:id="lblSearchTeacher" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSearchTeacher" layoutX="69.0" layoutY="319.0" promptText="enter Teacher ID" visible="false" />
+                        <Button fx:id="btnSearchTeacher" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <Button fx:id="btnUpdateTeacher" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
                      </children>
                   </AnchorPane>
               </content>
