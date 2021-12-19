@@ -817,7 +817,7 @@ public class BodyController {
         addTeacher = new Teacher(Integer.parseInt(tfTeacherId.getText()) , tfTeacherName.getText(), Integer.parseInt(tfTeacherAge.getText()),
         tfTeacherAge.getText(), tfTeacherSpec.getText(), tfTeacherDeg.getText(), Integer.parseInt(tfTeacherFk.getText()));
         Department relation = new Department(addTeacher.getFkDeptID());
-        Teacher fkT = new Teacher(addTeacher.getFkDeptID()); // This fix the duplicate issue
+        Teacher fkT = new Teacher(Integer.parseInt(tfTeacherId.getText()), addTeacher.getFkDeptID()); // This fix the duplicate issue
        
         if (departmentList.contains(relation) && !teacherList.contains(fkT)) {
             obsTeacherList.add(addTeacher);

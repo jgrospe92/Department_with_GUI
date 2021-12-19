@@ -119,26 +119,41 @@ public class FileReadandWrite {
                         String gender = values[3];
 
                         Teacher fkCheck = new Teacher(id, pk);
-                        Teacher uniqueFK = new Teacher(pk);
-                    
+          
                         if (!importTeacherList.contains(fkCheck)) {
-                            if (!importTeacherList.contains(uniqueFK)) {
-                                importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
-                                success++;
-                                
-                                for (Department dept : departmentList) {
-                                    for (Teacher teach : importTeacherList) {
-                                        if(dept.getId() == teach.getFkDeptID()) {
-                                            dept.getTeacherList().add(teach);
-                                        }
+                            importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
+                            success++;
+                            for (Department dept : departmentList) {
+                                for (Teacher teach : importTeacherList) {
+                                    if (dept.getId() == teach.getFkDeptID()) {
+                                        dept.getTeacherList().add(teach);
                                     }
                                 }
-
                             }
                             
                         } else {
                             corrupted++;
                         }
+                       
+
+                        // if (!importTeacherList.contains(fkCheck)) {
+                        //     if (!importTeacherList.contains(uniqueFK)) {
+                        //         importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
+                        //         success++;
+
+                        //         for (Department dept : departmentList) {
+                        //             for (Teacher teach : importTeacherList) {
+                        //                 if(dept.getId() == teach.getFkDeptID()) {
+                        //                     dept.getTeacherList().add(teach);
+                        //                 }
+                        //             }
+                        //         }
+
+                        //     }
+                            
+                        // } else {
+                        //     corrupted++;
+                        // }
                         
                     } else {
                         ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
@@ -185,9 +200,22 @@ public class FileReadandWrite {
                         String gender = values[3];
                         String duty = values[4];
                         int workload = Integer.parseInt(values[5]);
-
-                        importStaffList.add(new Staff(id, name, age, gender, duty, workload));
-                        success++;
+                        int fk = Integer.parseInt(values[6]);
+                        Staff tempStaff = new Staff(id, fk);
+                        if (!importStaffList.contains(tempStaff)) {
+                            importStaffList.add(new Staff(id, name, age, gender, duty, workload, fk));
+                            success++;
+                            for (Department dept : departmentList) {
+                                for (Staff staff : importStaffList) {
+                                    if (dept.getId() == staff.getFK()) {
+                                        dept.getStaffList().add(staff);
+                                    }
+                                }
+                            }
+                        } else {
+                            corrupted++;
+                        }
+                       
 
                     } else {
                         ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");

@@ -84,7 +84,7 @@ public class Teacher extends Person implements PayRoll{
         if (obj!=null) {
             if (obj.getClass()==this.getClass()) {
                 Teacher teacher = (Teacher) obj;
-                return (teacher.getFkDeptID() == this.getFkDeptID());
+                return (teacher.getId() == this.getId());
             }
         }
         return true;
