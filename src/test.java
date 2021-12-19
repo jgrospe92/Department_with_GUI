@@ -14,13 +14,13 @@ public class test {
 
         // import Test
 
-        // FileReadandWrite fileImp = new FileReadandWrite();
+        FileReadandWrite fileImp = new FileReadandWrite();
 
         // //System.out.println(fileImp.newFile()); 
 
-        // String filename = "Department";
+        String filename = "Department";
 
-        // fileImp.fileImportDepartment(filename, deptList, teachList);
+        fileImp.fileImportDepartment(filename, deptList, teachList);
 
         // deptList.get(1).setDean(new Teacher(123, "Jeff", 29, "male", "java","nothing"));
         // System.out.println(deptList.get(1).getDean().computePayRoll()); 
@@ -127,29 +127,35 @@ public class test {
     
     //    }
           
-    //    deptList.get(0).getStaffList().get(0).display();
+    FileReadandWrite impStaff = new FileReadandWrite();
+    String filenameS = "Staff";
+    impStaff.fileImportStaff(filenameS, deptList, staffList);
+
+    for (Staff s: staffList) {
+        s.display();
+    }
     
     // Test for Teacher
-    Department d1 = new Department(100, "description");
-    Department d2 = new Department(222, "de");
+    // Department d1 = new Department(100, "description");
+    // Department d2 = new Department(222, "de");
 
-    deptList.add(d1);
-    deptList.add(d2);
+    // deptList.add(d1);
+    // deptList.add(d2);
 
-    Teacher t1 = new Teacher(222, "name", 2, "gender", "speciality", "degree", 100);
-    Teacher t2 = new Teacher(333, "name", 2, "gender", "speciality", "degree", 100);
+    // Teacher t1 = new Teacher(222, "name", 2, "gender", "speciality", "degree", 100);
+    // Teacher t2 = new Teacher(333, "name", 2, "gender", "speciality", "degree", 100);
 
-    Teacher test = new Teacher(222, 100);
+    // Teacher test = new Teacher(222, 100);
 
 
-    teachList.add(t1);
-    teachList.add(t2);
+    // teachList.add(t1);
+    // teachList.add(t2);
 
-    if (teachList.contains(t2)) {
-        System.out.println("yes");
-    } else {
-        System.out.println("no");
-    }
+    // if (teachList.contains(t2)) {
+    //     System.out.println("yes");
+    // } else {
+    //     System.out.println("no");
+    // }
 
     // if (deptList.contains(test)) {
     //     System.out.printf("Yes");

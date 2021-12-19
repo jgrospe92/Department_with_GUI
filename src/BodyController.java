@@ -277,7 +277,92 @@ public class BodyController {
 
     @FXML
     private Button btnDelTeacher;
+    // Staff Section
+    @FXML
+    private Tab tabStaff;
     
+    @FXML
+    private TableView<Staff> tvStaff;
+
+    @FXML
+    private TableColumn<Staff, Integer> tblViewStaffID;
+
+    @FXML
+    private TableColumn<Staff, Integer> tblVstaffAge;
+
+    @FXML
+    private TableColumn<Staff, String> tblVstaffDuty;
+
+    @FXML
+    private TableColumn<Staff, Integer> tblVstaffFK;
+
+    @FXML
+    private TableColumn<Staff, String> tblVstaffGender;
+
+    @FXML
+    private TableColumn<Staff, String> tblVstaffName;
+
+    @FXML
+    private TableColumn<Staff, Double> tblVstaffSal;
+
+    @FXML
+    private TableColumn<Staff, Integer> tblVstaffWKL;
+    //Staff textField
+    @FXML
+    private TextField tfStaffAge;
+
+    @FXML
+    private TextField tfStaffDuty;
+
+    @FXML
+    private TextField tfStaffFK;
+
+    @FXML
+    private TextField tfStaffGender;
+
+    @FXML
+    private TextField tfStaffID;
+
+    @FXML
+    private TextField tfStaffName;
+
+    @FXML
+    private TextField tfStaffWorkload;
+    // Staff MenuItems
+    @FXML
+    private MenuItem menuImpStaff;
+    @FXML
+    private MenuItem menuExportStaff;
+    @FXML
+    private MenuItem menuAddStaff;
+    @FXML
+    private MenuItem menuDelStaff;
+    @FXML
+    private MenuItem menuUpdateStaff;
+    @FXML
+    private MenuItem menuSStaff;
+    // Import function
+    @FXML private Label lblImportStaff;
+    @FXML private TextField tfImpStaff;
+    @FXML private Button btnImpStaff;
+    // Export function
+    @FXML private Label lblExpoStaff;
+    @FXML private TextField tfExpoStaff;
+    @FXML private Button btnExpoStaff;
+    // Add function
+    @FXML private Button btnAddStaff;
+    // Dell Function
+    @FXML private Label lblDelStaff;
+    @FXML private TextField tfDelStaff;
+    @FXML private Button btnDelStaff;
+    // Update Function
+    @FXML private Button btnUpdateStaff;
+    // Search Function
+    @FXML private Label lblSStaff;
+    @FXML private TextField tfSStaff;
+    @FXML private Button btnSStaff;
+    @FXML private Label lblStaffSal;
+    @FXML private TextField tfStaffStall;
 
     Stage stage;
 
@@ -285,13 +370,15 @@ public class BodyController {
     public static ArrayList<Department> departmentList = new ArrayList<>();
     public static ArrayList<Teacher> teacherList = new ArrayList<>();
     public static ArrayList<Student> studentList = new ArrayList<>();
-    public static ArrayList<Staff> StaffList = new ArrayList<>();
+    public static ArrayList<Staff> staffList = new ArrayList<>();
 
     // ObservableList
     public static ObservableList<Department> obsDeptList = FXCollections.observableArrayList(/*departmentList*/);
     public static ObservableList<Teacher> obsDeanList = FXCollections.observableArrayList();
     public static ObservableList<Teacher> obsTeacherList = FXCollections.observableArrayList(/*teacherList*/);
     public static ObservableList<Department> deanTempList = FXCollections.observableArrayList(/*departmentList*/);
+    public static ObservableList<Staff> obsStaff = FXCollections.observableArrayList();
+
 
     // Initialize Dept
     public void initializeDept(ObservableList<Department> dept) {
@@ -327,10 +414,65 @@ public class BodyController {
        tvDean.setItems(teacher);
            
     }
-    // public void initializeDeanName(ObservableList<Department> dd){
-    //     tblViewDean.setCellValueFactory( new PropertyValueFactory<>("deanName"));
-    //     tvDept.setItems(dd);
-    // }
+    private void initializeStaff(ObservableList<Staff> staff){
+        tblViewStaffID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblVstaffName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblVstaffAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        tblVstaffGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        tblVstaffDuty.setCellValueFactory(new PropertyValueFactory<>("duty"));
+        tblVstaffWKL.setCellValueFactory(new PropertyValueFactory<>("workload"));
+        tblVstaffSal.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        tblVstaffFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
+        tvStaff.setItems(staff); 
+    }
+
+    private void showSStaff(){
+        lblSStaff.setVisible(true);
+        tfSStaff.setVisible(true);
+        btnSStaff.setVisible(true);
+        lblStaffSal.setVisible(true);
+        tfStaffStall.setVisible(true);
+    }
+    private void hideSStaff(){
+        lblSStaff.setVisible(false);
+        tfSStaff.setVisible(false);
+        btnSStaff.setVisible(false);
+        lblStaffSal.setVisible(false);
+        tfStaffStall.setVisible(false);
+
+    }
+    private void showDelStaff(){
+        lblDelStaff.setVisible(true);
+        tfDelStaff.setVisible(true);
+        btnDelStaff.setVisible(true);
+    }
+    private void hideDelStaff(){
+        lblDelStaff.setVisible(false);
+        tfDelStaff.setVisible(false);
+        btnDelStaff.setVisible(false);
+    }
+    private void showExpoStaff(){
+        lblExpoStaff.setVisible(true);
+        tfExpoStaff.setVisible(true);
+        btnExpoStaff.setVisible(true);
+    }
+
+    private void hideExpoStaff(){
+        lblExpoStaff.setVisible(false);
+        tfExpoStaff.setVisible(false);
+        btnExpoStaff.setVisible(false);
+    }
+    private void showImpStaff(){
+        lblImportStaff.setVisible(true);
+        tfImpStaff.setVisible(true);
+        btnImpStaff.setVisible(true);
+    }
+    private void hideImpStaff(){
+        lblImportStaff.setVisible(false);
+        tfImpStaff.setVisible(false);
+        btnImpStaff.setVisible(false);
+    }
+
     private void showAddDean(){
         btnAssDean.setVisible(true);
         tfDesc.setDisable(true);
@@ -440,6 +582,7 @@ public class BodyController {
                 FileReadandWrite saveData = new FileReadandWrite();
                 saveData.saveDepartment(new ArrayList<>(obsDeptList));
                 saveData.saveTeacher(new ArrayList<>(obsTeacherList));
+                saveData.saveStaff(new ArrayList<>(obsStaff));
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
@@ -454,6 +597,7 @@ public class BodyController {
             FileReadandWrite saveData = new FileReadandWrite();
             saveData.saveDepartment(new ArrayList<>(obsDeptList));
             saveData.saveTeacher(new ArrayList<>(obsTeacherList));
+            saveData.saveStaff(new ArrayList<>(obsStaff));
             // Save option for Teacher, Student and Staff
             // Create save method inside FileReadandWrite class
         } 
@@ -575,9 +719,80 @@ public class BodyController {
             btnAddTeach.setVisible(false);
             hideSearchTeacher();
             showDelTeacher();
+        }// Staff
+        else if (event.getSource() == menuImpStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            showImpStaff();
+            hideExpoStaff();
+            btnAddStaff.setVisible(false);
+            hideDelStaff();
+            hideSStaff();
+            btnUpdateStaff.setVisible(false);
+        } else if (event.getSource() == menuExportStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            hideImpStaff();
+            showExpoStaff();
+            btnAddStaff.setVisible(false);
+            hideDelStaff();
+            hideSStaff();
+            btnUpdateStaff.setVisible(false);
+        } else if (event.getSource() == menuAddStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            hideImpStaff();
+            hideExpoStaff();
+            btnAddStaff.setVisible(true);
+            hideDelStaff();
+            btnUpdateStaff.setVisible(false);
+            hideSStaff();
+        } else if (event.getSource() == menuDelStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            hideImpStaff();
+            hideExpoStaff();
+            btnAddStaff.setVisible(false);
+            btnUpdateStaff.setVisible(false);
+            hideSStaff();
+            showDelStaff();
+        } else if (event.getSource() == menuUpdateStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            hideImpStaff();
+            hideExpoStaff();
+            btnAddStaff.setVisible(false);
+            hideDelStaff();
+            hideSStaff();
+            btnUpdateStaff.setVisible(true);
+        } else if (event.getSource() == menuSStaff) {
+            btnUpdateTeacher.setVisible(false);
+            hideExportTeacher();
+            hideImportTeacher();
+            btnAddTeach.setVisible(false);
+            hideSearchTeacher();
+            hideImpStaff();
+            hideExpoStaff();
+            btnAddStaff.setVisible(false);
+            hideDelStaff();
+            btnUpdateStaff.setVisible(false);
+            showSStaff();
         }
-            
-        
  
     }
     public void btnAction(ActionEvent event) {
@@ -619,8 +834,6 @@ public class BodyController {
             } else {
                 primaryKeyConstraint();
             }
-            
-          
         }
         if (event.getSource() == btnSearchDept) {
             searchItem();
@@ -711,6 +924,113 @@ public class BodyController {
             hideDelTeacher();
             tfDelTeacher.clear();
         }
+        // Staff Btn Action
+        if (event.getSource() == btnImpStaff) {
+            System.out.println("import staff");
+            FileReadandWrite impStaff = new FileReadandWrite();
+            String filename = tfImpStaff.getText();
+            impStaff.fileImportStaff(filename, departmentList, staffList);
+            obsStaff = FXCollections.observableArrayList(staffList);
+            initializeStaff(obsStaff);
+            hideImpStaff();
+        }
+        if (event.getSource() == btnExpoStaff) {
+            System.out.println("Export staff");
+            FileReadandWrite expoStaff = new FileReadandWrite();
+            String filename = tfExpoStaff.getText();
+            expoStaff.fileExportStaff(filename, new ArrayList<>(obsStaff));
+            hideExpoStaff();
+        }
+        if (event.getSource() == btnAddStaff) {
+            System.out.printf("Add staff");
+            addBtnStaff();
+            btnAddStaff.setVisible(false);
+        }
+        if (event.getSource() == btnDelStaff) {
+            System.out.println("Delete Staff");
+            for (int i = 0; i < obsStaff.size(); i++) {
+                if (obsStaff.get(i).getId() == Integer.parseInt(tfDelStaff.getText())){
+                    obsStaff.remove(i);
+                }
+            }
+            hideDelStaff();
+            tfDelStaff.clear();
+        }
+        if (event.getSource() == btnUpdateStaff){
+            System.out.println("update staff");
+            int id = Integer.parseInt(tfStaffID.getText());
+            String name = tfStaffName.getText();
+            int age = Integer.parseInt(tfStaffAge.getText());
+            String gender = tfStaffGender.getText();
+            String duty = tfStaffDuty.getText();
+            int workload = Integer.parseInt(tfStaffWorkload.getText());
+            int fk = Integer.parseInt(tfStaffFK.getText());
+            Staff updateStaff = new Staff(id, name, age, gender, duty, workload, fk);
+
+            Department relation = new Department(updateStaff.getFkDeptID());
+            if (departmentList.contains(relation)){
+
+                for (int i = 0 ; i < obsStaff.size(); i++) {
+                    if(obsStaff.get(i).getId() == id) {
+                        obsStaff.set(i,updateStaff);
+                    }
+                }
+            } else {
+                PKDoesNotExist();
+            }
+        }
+        if (event.getSource() == btnSStaff) {
+            searchStaff();
+        }
+    }
+    private  void searchStaff(){
+        Staff currentStaff = new Staff();
+        Iterator<Staff> iterator = obsStaff.iterator();
+
+        while(iterator.hasNext()) {
+            currentStaff = iterator.next();
+            if (currentStaff.getId() == Integer.parseInt(tfSStaff.getText())){
+
+                tfStaffID.setText(Integer.toString(currentStaff.getId()));
+                tfStaffName.setText(currentStaff.getName());
+                tfStaffAge.setText(Integer.toString(currentStaff.getAge()));
+                tfStaffGender.setText(currentStaff.getGender());
+                tfStaffDuty.setText(currentStaff.getDuty());
+                tfStaffWorkload.setText(Integer.toString(currentStaff.getWorkload()));
+                tfStaffFK.setText(Integer.toString(currentStaff.getFkDeptID()));
+                tfStaffStall.setText(Double.toString(currentStaff.getSalary()));
+            }
+        }
+    }
+    private void addBtnStaff(){
+        Staff addStaff;
+            int id = Integer.parseInt(tfStaffID.getText());
+            String name = tfStaffName.getText();
+            int age = Integer.parseInt(tfStaffAge.getText());
+            String gender = tfStaffGender.getText();
+            String duty = tfStaffDuty.getText();
+            int workload = Integer.parseInt(tfStaffWorkload.getText());
+            int fk = Integer.parseInt(tfStaffFK.getText());
+
+            addStaff = new Staff(id, name, age, gender, duty, workload, fk);
+            Department relation = new Department(addStaff.getFkDeptID());
+            Staff fkT = new Staff(addStaff.getId(), addStaff.getFkDeptID());
+
+            if (departmentList.contains(relation) && !staffList.contains(fkT)) {
+                obsStaff.add(addStaff);
+                staffList.add(addStaff);
+                initializeStaff(obsStaff);
+                // Add this Teacher directly to the corresponding department.
+                for (int i = 0;i < obsDeptList.size(); i++ ) {
+                    if (obsDeptList.get(i).getId() == addStaff.getFkDeptID()) {
+                        obsDeptList.get(i).getStaffList().add(addStaff);
+                    }
+                }
+    
+            } else {
+                PKDoesNotExist();
+               
+            }
     }
     private void assignDean(){
 
@@ -893,6 +1213,9 @@ public class BodyController {
         if (event.getSource() == tabDepartment) {
             lblSection.setText("Section: " + tabDepartment.getText());
             
+        }
+        if (event.getSource() == tabStaff) {
+            lblSection.setText("Section: " + tabStaff.getText());
         }
       
       

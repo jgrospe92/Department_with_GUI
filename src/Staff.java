@@ -1,8 +1,8 @@
 public class Staff extends Person implements PayRoll{
     private String duty;
     private int workload;
-    private int staffFKDeptID;
     private double salary;
+    private int fkDeptID;
 
     // Empty Constructor
     public Staff(){
@@ -14,12 +14,18 @@ public class Staff extends Person implements PayRoll{
         super(id, name, age, gender);
         this.duty = duty;
         this.workload = workload;
-        this.staffFKDeptID = pk;
         this.salary = computePayRoll();
+        this.fkDeptID = pk;
+        
     }
     // Constructor for ID
+    public Staff(int id, int fk ) {
+        super(id);
+        this.fkDeptID = fk;
+    }
+
     public Staff(int fk){
-        this.staffFKDeptID = fk;
+        this.fkDeptID = fk;
     }
 
     //Setters
@@ -31,7 +37,7 @@ public class Staff extends Person implements PayRoll{
         this.workload = workload;
     }
     public void setFk(int fk){
-        this.staffFKDeptID = fk;
+        this.fkDeptID = fk;
     }
 
     //Getters
@@ -45,8 +51,8 @@ public class Staff extends Person implements PayRoll{
     public double getSalary(){
         return this.salary;
     }
-    public int getFK(){
-        return this.staffFKDeptID;
+    public int getFkDeptID(){
+        return this.fkDeptID;
     }
     
     //Methods
@@ -66,12 +72,13 @@ public class Staff extends Person implements PayRoll{
         super.display();
         System.out.println("Duty: " + this.duty + "\n" + 
                             "Workload: " + this.workload + "\n" +
-                            "FK: " + this.staffFKDeptID + "\n" + "Salary: " + this.salary);
+                            "Salary: " + this.salary +
+                            "FK: " + this.fkDeptID + "\n");
     }
 
     @Override
     public String formatted(){
-        return super.formatted() + "," + duty + "," + workload + "," + staffFKDeptID;
+        return super.formatted() + "," + duty + "," + workload + "," + fkDeptID;
     }
 
 
@@ -80,7 +87,7 @@ public class Staff extends Person implements PayRoll{
         if (obj!=null) {
             if (obj.getClass()==this.getClass()) {
                 Staff staff = (Staff) obj;
-                return (staff.getFK() == this.getFK());
+                return (staff.getId() == this.getId());
             }
         }
         return true;

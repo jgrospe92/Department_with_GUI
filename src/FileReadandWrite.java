@@ -207,7 +207,7 @@ public class FileReadandWrite {
                             success++;
                             for (Department dept : departmentList) {
                                 for (Staff staff : importStaffList) {
-                                    if (dept.getId() == staff.getFK()) {
+                                    if (dept.getId() == staff.getFkDeptID()) {
                                         dept.getStaffList().add(staff);
                                     }
                                 }
@@ -328,6 +328,26 @@ public class FileReadandWrite {
         try {
             for (Teacher teacher : tt) {
                 fileContent = fileContent.concat(teacher.formatted() + "\n");  
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            // Should i make the true into variable
+            FileWriter writer = new FileWriter(exportPath); // It will be written to this file
+            writer.write(fileContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveStaff(ArrayList<Staff> ss){
+        String exportPath = "Data" + "/" + "Import" + "/" + "Staff" + ".txt";
+        String fileContent = "";
+        try {
+            for (Staff staff : ss) {
+                fileContent = fileContent.concat(staff.formatted() + "\n");  
             }
 
         } catch (Exception e) {
