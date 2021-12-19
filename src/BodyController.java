@@ -363,6 +363,66 @@ public class BodyController {
     @FXML private Button btnSStaff;
     @FXML private Label lblStaffSal;
     @FXML private TextField tfStaffStall;
+    // Student Section
+    @FXML private Tab tabStudent;
+    
+    @FXML
+    private TextField tfStuAge;
+
+    @FXML
+    private TextField tfStuCourse;
+
+    @FXML
+    private TextField tfStuFK;
+
+    @FXML
+    private TextField tfStuGender;
+
+    @FXML
+    private TextField tfStuID;
+
+    @FXML
+    private TextField tfStuName;
+
+    @FXML
+    private TextField tfStuSem;
+
+    // Table view
+    @FXML
+    private TableView<Student> tvStudent;
+
+    @FXML
+    private TableColumn<Student, Integer> tblVstuAge;
+
+    @FXML
+    private TableColumn<Student, String> tblVstuCourse;
+
+    @FXML
+    private TableColumn<Student, Integer> tblVstuFK;
+
+    @FXML
+    private TableColumn<Student, String> tblVstuGender;
+
+    @FXML
+    private TableColumn<Student, Integer> tblVstuID;
+
+    @FXML
+    private TableColumn<Student, String> tblVstuName;
+
+    @FXML
+    private TableColumn<Student, Integer> tblVstuSem;
+
+    // MenuItem
+    @FXML private MenuItem menuImpStu;
+    @FXML private MenuItem menuExpoStu;
+    @FXML private MenuItem menuAddStu;
+    @FXML private MenuItem menuDelStu;
+    @FXML private MenuItem menuUpdateStu;
+    @FXML private MenuItem menuSStu;
+    // Import function
+    @FXML private Label lblImportStu;
+    @FXML private TextField tfImportStu;
+    @FXML private Button btnImportStu;
 
     Stage stage;
 
@@ -378,6 +438,7 @@ public class BodyController {
     public static ObservableList<Teacher> obsTeacherList = FXCollections.observableArrayList(/*teacherList*/);
     public static ObservableList<Department> deanTempList = FXCollections.observableArrayList(/*departmentList*/);
     public static ObservableList<Staff> obsStaff = FXCollections.observableArrayList();
+    public static ObservableList<Student> obsStudentList = FXCollections.observableArrayList();
 
 
     // Initialize Dept
@@ -388,8 +449,6 @@ public class BodyController {
         tvDept.setItems(dept);
 
     }
-
- 
 
     private ObservableList<Teacher> getDeanNow (){
         for (int i = 0; i < obsDeptList.size(); i++) {
@@ -425,7 +484,26 @@ public class BodyController {
         tblVstaffFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
         tvStaff.setItems(staff); 
     }
-
+    public void initializeStudent(ObservableList<Student> student) {
+        tblVstuID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblVstuName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblVstuAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        tblVstuGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        tblVstuCourse.setCellValueFactory(new PropertyValueFactory<>("course"));
+        tblVstuSem.setCellValueFactory(new PropertyValueFactory<>("semester"));
+        tblVstuFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
+        tvStudent.setItems(student);
+    }
+    private void showImpStu(){
+        lblImportStu.setVisible(true);
+        tfImportStu.setVisible(true);
+        btnImportStu.setVisible(true);
+    }
+    private void hideImpStu(){
+        lblImportStu.setVisible(false);
+        tfImportStu.setVisible(false);
+        btnImportStu.setVisible(false);
+    }
     private void showSStaff(){
         lblSStaff.setVisible(true);
         tfSStaff.setVisible(true);
@@ -484,7 +562,6 @@ public class BodyController {
         tfDesc.setDisable(false);
         tfDean.setVisible(false);
         lblDean.setVisible(false);
-
 
     }
 
@@ -583,6 +660,7 @@ public class BodyController {
                 saveData.saveDepartment(new ArrayList<>(obsDeptList));
                 saveData.saveTeacher(new ArrayList<>(obsTeacherList));
                 saveData.saveStaff(new ArrayList<>(obsStaff));
+                saveData.saveStudent(new ArrayList<>(obsStudentList));
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
@@ -598,6 +676,7 @@ public class BodyController {
             saveData.saveDepartment(new ArrayList<>(obsDeptList));
             saveData.saveTeacher(new ArrayList<>(obsTeacherList));
             saveData.saveStaff(new ArrayList<>(obsStaff));
+            saveData.saveStudent(new ArrayList<>(obsStudentList));
             // Save option for Teacher, Student and Staff
             // Create save method inside FileReadandWrite class
         } 
@@ -792,6 +871,9 @@ public class BodyController {
             hideDelStaff();
             btnUpdateStaff.setVisible(false);
             showSStaff();
+        } // Student
+        else if (event.getSource() == menuImpStu) {
+            showImpStu();
         }
  
     }
@@ -981,6 +1063,16 @@ public class BodyController {
         }
         if (event.getSource() == btnSStaff) {
             searchStaff();
+        }
+        // Student Button Function
+        if (event.getSource() == btnImportStu) {
+            System.out.println("import Student");
+            FileReadandWrite impStaff = new FileReadandWrite();
+            String filename = tfImportStu.getText();
+            impStaff.fileImportStudent(filename, departmentList, studentList);
+            obsStudentList = FXCollections.observableArrayList(studentList);
+            initializeStudent(obsStudentList);
+            hideImpStaff();
         }
     }
     private  void searchStaff(){

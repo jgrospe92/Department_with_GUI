@@ -375,6 +375,26 @@ public class FileReadandWrite {
             e.printStackTrace();
         }
     }
+    public void saveStudent(ArrayList<Student> stu){
+        String exportPath = "Data" + "/" + "Import" + "/" + "Student" + ".txt";
+        String fileContent = "";
+        try {
+            for (Student student : stu) {
+                fileContent = fileContent.concat(student.formatted() + "\n");  
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            // Should i make the true into variable
+            FileWriter writer = new FileWriter(exportPath); // It will be written to this file
+            writer.write(fileContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void fileExportDepartment(String filneName, ArrayList<Department> dd) {
 
