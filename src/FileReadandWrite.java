@@ -226,7 +226,7 @@ public class FileReadandWrite {
 
                 } else {
                     corrupted++;
-                    // raise an exception
+                   
                 }
             }
             dataImportLog(success, corrupted);
@@ -264,9 +264,22 @@ public class FileReadandWrite {
                         String gender = values[3];
                         String course = values[4];
                         int semester = Integer.parseInt(values[5]);
+                        int fk = Integer.parseInt(values[6]);
+                        Student checkFK = new Student(id, fk);
 
-                        importStudentList.add(new Student(id, name, age, gender, course, semester)); // add FK
-                        success++;
+                        if (!importStudentList.contains(checkFK)) {
+                            importStudentList.add(new Student(id, name, age, gender, course, semester, fk)); // add FK
+                            success++;
+                            for (Department dept : departmentList) {
+                                for (Student student : importStudentList) {
+                                    if (dept.getId() == student.getFkDeptID()) {
+                                        dept.getStudentList().add(student);
+                                    }
+                                }
+                            }
+                        } else {
+                            corrupted++;
+                        }
 
                     } else {
                         corrupted++;
@@ -276,7 +289,7 @@ public class FileReadandWrite {
 
                 } else {
                     corrupted++;
-                    // raise an exception
+                   
                 }
             }
             dataImportLog(success, corrupted);
