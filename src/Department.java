@@ -20,6 +20,9 @@ public class Department {
         this.id = id;
         this.description = description;
     }
+    public Department(Teacher dean){
+        this.deanName = dean.getName();
+    }
 
     // Constructor ID, description, Dean
     public Department(int id, String description, Teacher dean) {

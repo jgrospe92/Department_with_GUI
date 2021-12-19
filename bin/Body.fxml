@@ -37,6 +37,7 @@
                   <MenuItem fx:id="menuDelete" mnemonicParsing="false" onAction="#tabAction" text="delete" />
                   <MenuItem fx:id="menuUpdate" mnemonicParsing="false" onAction="#tabAction" text="update" />
                   <MenuItem fx:id="menuSearch" mnemonicParsing="false" onAction="#tabAction" text="search" />
+                  <MenuItem fx:id="menuItemAssDean" mnemonicParsing="false" onAction="#tabAction" text="assign dean" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Teacher">
@@ -103,14 +104,13 @@
                                     <Insets bottom="16.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextField fx:id="tfDean" promptText="enter dean ID" />
+                              <TextField fx:id="tfDean" promptText="enter Teacher" />
                            </children>
                         </VBox>
-                        <TableView fx:id="tvDept" layoutX="392.0" layoutY="12.0" prefHeight="265.0" prefWidth="368.0">
+                        <TableView fx:id="tvDept" layoutX="392.0" layoutY="12.0" prefHeight="265.0" prefWidth="436.0">
                           <columns>
                             <TableColumn fx:id="tblViewID" prefWidth="96.0" text="ID" />
-                            <TableColumn fx:id="tblViewDesc" prefWidth="154.0" text="Description" />
-                              <TableColumn fx:id="tblViewDean" prefWidth="120.0" text="Dean" />
+                            <TableColumn fx:id="tblViewDesc" prefWidth="271.0" text="Description" />
                           </columns>
                         </TableView>
                         <Button fx:id="btnAddDept" layoutX="213.0" layoutY="131.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
@@ -131,6 +131,7 @@
                         <Button fx:id="btnDelete" layoutX="160.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
                         <Button fx:id="btnModify" layoutX="197.0" layoutY="131.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
                         <Button fx:id="btnExport" layoutX="168.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Button fx:id="btnAssDean" layoutX="223.0" layoutY="141.0" mnemonicParsing="false" onAction="#btnAction" text="assign" visible="false" />
                      </children>
                   </AnchorPane>
             </content>

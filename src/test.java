@@ -59,38 +59,68 @@ public class test {
         // }
 
         
-
+        // Algorithm to add Dean  
         Teacher t1 = new Teacher(123, "jeff", 29, "m", "coder", "master", 222);
         Teacher t2 = new Teacher(2223, "fda", 29, "m", "coder", "master", 777);
-        teachList.add(t1);
-        teachList.add(t2);
-        Department test = new Department(t1.getFkDeptID());
-        Teacher testFk = new Teacher(t1.getId() , t1.getFkDeptID());
-        Department addDept1 = new Department(1001, "test", t1);
-        Department addDept2 = new Department(222, "test", t1);
-        Department addDept3 = new Department(333, "test", t1);
+        Teacher t3 = new Teacher(2223, "fda", 29, "m", "coder", "master", 777);
 
+
+        int deptId = 1001;
+        int teacherId = 123;
+
+        Department addDept1 = new Department(1001, "test");
+        addDept1.getTeacherList().add(t1);
+        Department addDept2 = new Department(222, "test", t1);
+        Department addDept3 = new Department(333, "test", t2);
 
         deptList.add(addDept1);
         deptList.add(addDept2);
         deptList.add(addDept3);
 
+        System.out.println("....");
 
-        if (deptList.contains(test)){
-            System.out.println("true");
-            if(teachList.contains(testFk)) {
-                System.out.printf("yes");
+        boolean foundIt = false;
+        boolean teacherNotInDept = false;
+
+       for (Department department : deptList) {
+            if (department.getId() == deptId && department.getDean() == null ) {
+                foundIt = true;
+                for (Teacher teacher : department.getTeacherList()) {
+                    if (teacher.getId() == teacherId) {
+                        department.setDean(teacher);
+                        teacherNotInDept = true;
+                    }
+                }
             } else {
-                System.out.println("no");
+                //department.getDean().display();
             }
-            // for(int i = 0; i < teachList.size(); i++){
-            //     if (teachList.get(i).getFkDeptID() == t1.getFkDeptID()) {
-            //         System.out.println("yes");
-            //     } 
-            // } 
-        } else {
-            System.out.println("false");
-        }
+            department.showInfo();
+       }
+
+       if (foundIt && teacherNotInDept) {
+           System.out.println("found it");
+       }
+       else {
+           System.out.println("exception raise");
+       }
+
+       
+
+        // if (deptList.contains(test) ){
+        //     System.out.println("true");
+        //     if(teachList.contains(testFk)) {
+        //         System.out.printf("yes");
+        //     } else {
+        //         System.out.println("no");
+        //     }
+        //     // for(int i = 0; i < teachList.size(); i++){
+        //     //     if (teachList.get(i).getFkDeptID() == t1.getFkDeptID()) {
+        //     //         System.out.println("yes");
+        //     //     } 
+        //     // } 
+        // } else {
+        //     System.out.println("false");
+        // }
 
         
         // Student ss1 = new Student(123, "jeffrey", 21, "male", "pc", 1);

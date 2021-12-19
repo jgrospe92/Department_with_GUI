@@ -99,8 +99,8 @@ public class BodyController {
     private Tab tabTeacher;
 
     // Table view for Department
-    @FXML
-    private TableColumn<Department, String> tblViewDean;
+    // @FXML
+    // private TableColumn<Department, String> tblViewDean;
 
     @FXML
     private TableColumn<Department, String> tblViewDesc;
@@ -156,6 +156,12 @@ public class BodyController {
 
     @FXML
     private TextField tftSearchDept;
+    // assign dean
+    @FXML
+    private MenuItem menuItemAssDean;
+
+    @FXML
+    private Button btnAssDean;
 
     // Teacher Section
     @FXML
@@ -285,15 +291,18 @@ public class BodyController {
     public static ObservableList<Department> obsDeptList = FXCollections.observableArrayList(/*departmentList*/);
     public static ObservableList<Teacher> obsDeanList = FXCollections.observableArrayList();
     public static ObservableList<Teacher> obsTeacherList = FXCollections.observableArrayList(/*teacherList*/);
+    public static ObservableList<Department> deanTempList = FXCollections.observableArrayList(/*departmentList*/);
 
     // Initialize Dept
     public void initializeDept(ObservableList<Department> dept) {
         tblViewID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tblViewDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
-        tblViewDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
+        //tblViewDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
         tvDept.setItems(dept);
 
     }
+
+ 
 
     private ObservableList<Teacher> getDeanNow (){
         for (int i = 0; i < obsDeptList.size(); i++) {
@@ -317,6 +326,24 @@ public class BodyController {
        tblViewDeanFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
        tvDean.setItems(teacher);
            
+    }
+    // public void initializeDeanName(ObservableList<Department> dd){
+    //     tblViewDean.setCellValueFactory( new PropertyValueFactory<>("deanName"));
+    //     tvDept.setItems(dd);
+    // }
+    private void showAddDean(){
+        btnAssDean.setVisible(true);
+        tfDesc.setDisable(true);
+        tfDean.setVisible(true);
+        lblDean.setVisible(true);
+    }
+    private void hideAddDean(){
+        btnAssDean.setVisible(false);
+        tfDesc.setDisable(false);
+        tfDean.setVisible(false);
+        lblDean.setVisible(false);
+
+
     }
 
     private void showField(){
@@ -440,6 +467,7 @@ public class BodyController {
             btnSubmit.setVisible(true);
             btnAddDept.setVisible(false);
             btnExport.setVisible(false);
+            hideAddDean();
 
         } else if (event.getSource() == menuExport)  {
             hideDeleteField();
@@ -450,7 +478,7 @@ public class BodyController {
             tftImportName.setVisible(true);
             btnExport.setVisible(true);
             btnModify.setVisible(false);
-          
+            hideAddDean();
         }  
         else if (event.getSource() == menuSearch){
             btnModify.setVisible(false);
@@ -459,6 +487,7 @@ public class BodyController {
             showField();
             hideImport();
             btnExport.setVisible(false);
+            hideAddDean();
         } else if (event.getSource() == menuDelete) {
             btnAddDept.setVisible(false);
             btnModify.setVisible(false);
@@ -466,7 +495,8 @@ public class BodyController {
             hideField();
             showDeleteField();
             btnExport.setVisible(false);
-            hideImport();            
+            hideImport();    
+            hideAddDean();        
         }
          else if (event.getSource() == menuAdd) {
             hideImport();
@@ -476,7 +506,7 @@ public class BodyController {
             btnAddDept.setVisible(true);
             tfDean.setVisible(true);
             lblDean.setVisible(true);
-            
+            hideAddDean();
         } else if (event.getSource() == menuUpdate) {
             System.out.printf("update");
             hideImport();
@@ -487,8 +517,20 @@ public class BodyController {
             tfDean.setVisible(false);
             lblDean.setVisible(false);
             btnExport.setVisible(false);
+            hideAddDean();
           
-        } else if (event.getSource() == menuTeacherAdd) {
+        } else if (event.getSource() == menuItemAssDean) {
+            hideImport();
+            hideDeleteField();
+            hideField();
+            btnAddDept.setVisible(false);
+            tfDean.setVisible(false);
+            lblDean.setVisible(false);
+            btnExport.setVisible(false);
+            btnModify.setVisible(false);
+            showAddDean();
+        }
+        else if (event.getSource() == menuTeacherAdd) {
             btnAddTeach.setVisible(true);
             hideImportTeacher();
             hideExportTeacher();
@@ -605,6 +647,10 @@ public class BodyController {
                 }
             }
         }
+        if (event.getSource() == btnAssDean) {
+            assignDean();
+            hideAddDean();
+        }
         // Teacher Button Event
 
         if (event.getSource() == btnAddTeach) {
@@ -641,14 +687,6 @@ public class BodyController {
             String degree = tfTeacherDeg.getText();
             int fk = Integer.parseInt(tfTeacherFk.getText());
             Teacher updateTeacher = new Teacher(id, name, age, gender,spec,degree,fk);
-            //Teacher updateTeacher = new Teacher();
-            // updateTeacher.setId(id);
-            // updateTeacher.setName(name);
-            // updateTeacher.setAge(age);
-            // updateTeacher.setGender(gender);
-            // updateTeacher.setSpeciality(spec);
-            // updateTeacher.setDegree(degree);
-            // updateTeacher.setFK(fk);
             
             Department relation = new Department(updateTeacher.getFkDeptID());
             if (departmentList.contains(relation)){
@@ -673,6 +711,52 @@ public class BodyController {
             hideDelTeacher();
             tfDelTeacher.clear();
         }
+    }
+    private void assignDean(){
+
+        boolean foundIt = false;
+        boolean teacherNotInDept = false;
+
+        int deptId = Integer.parseInt(tfId.getText());
+        int teacherId = Integer.parseInt(tfDean.getText());
+        obsDeptList = FXCollections.observableArrayList(departmentList);// del
+        for (int i = 0 ; i < obsDeptList.size(); i ++) {
+            if (obsDeptList.get(i).getId() == deptId && obsDeptList.get(i).getDean() == null ) {
+                foundIt = true;
+
+                for (int j = 0; j < obsDeptList.get(i).getTeacherList().size(); j ++) {
+                    if (obsDeptList.get(i).getTeacherList().get(j).getId() == teacherId) {
+                        obsDeptList.get(i).setDean(obsDeptList.get(i).getTeacherList().get(j));
+                        teacherNotInDept = true;
+                        obsDeanList.add(obsDeptList.get(i).getTeacherList().get(j));
+
+                     
+                     
+                        initializeDept(obsDeptList); // remove ths
+                        
+                        break;
+                    }
+                }
+            }
+            
+            obsDeptList.get(i).showInfo();
+        }
+        initializeDept(obsDeptList); 
+        System.out.println("Departmet list");
+        for(Department dep: departmentList) {
+            dep.showInfo();
+        }
+        //initializeDean(obsTeacherList);
+        for(int i = 0; i < obsDeanList.size(); i ++) {
+            obsDeanList.get(i).display();
+        }
+        if (foundIt && teacherNotInDept) {
+            System.out.println("found it");
+        } else {
+            PKDoesNotExist();
+        }
+    
+    
     }
     private void primaryKeyConstraint(){
         Alert alert = new Alert(AlertType.ERROR);
@@ -739,11 +823,18 @@ public class BodyController {
             obsTeacherList.add(addTeacher);
             teacherList.add(addTeacher);
             initializeTeacher(obsTeacherList);
+            // Add this Teacher directly to the corresponding department.
+            for (int i = 0;i < obsDeptList.size(); i++ ) {
+                if (obsDeptList.get(i).getId() == addTeacher.getFkDeptID()) {
+                    obsDeptList.get(i).getTeacherList().add(addTeacher);
+                }
+            }
 
         } else {
             PKDoesNotExist();
            
         }
+        
     }
 
     // Iterator Method

@@ -120,16 +120,25 @@ public class FileReadandWrite {
 
                         Teacher fkCheck = new Teacher(id, pk);
                         Teacher uniqueFK = new Teacher(pk);
+                    
                         if (!importTeacherList.contains(fkCheck)) {
                             if (!importTeacherList.contains(uniqueFK)) {
                                 importTeacherList.add(new Teacher(id, name, age, gender, speciality, degree, pk));
                                 success++;
+                                
+                                for (Department dept : departmentList) {
+                                    for (Teacher teach : importTeacherList) {
+                                        if(dept.getId() == teach.getFkDeptID()) {
+                                            dept.getTeacherList().add(teach);
+                                        }
+                                    }
+                                }
+
                             }
                             
                         } else {
                             corrupted++;
                         }
-                       
                         
                     } else {
                         ExceptionHandling fkConstraint = new ExceptionHandling("Department does not exist!");
