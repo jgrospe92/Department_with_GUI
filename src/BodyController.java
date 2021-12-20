@@ -760,7 +760,7 @@ public class BodyController {
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
-            }else if (alert.showAndWait().get() == noBtn) {
+            }else {
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
@@ -992,6 +992,7 @@ public class BodyController {
             hideExportStu();
             btnAddStu.setVisible(true);
             hideSearchStu();
+            hideDelStu();
         } else if (event.getSource() == menuDelStu) {
             hideImpStu();
             hideExportStu();

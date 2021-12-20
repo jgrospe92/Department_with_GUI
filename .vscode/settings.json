@@ -2,31 +2,18 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        //JavaFx For Mac
-        "lib/**/*.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx-swt.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.base.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.controls.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.fxml.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.graphics.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.media.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.swing.jar",
-        "/Library/Java/JavaVirtualMachines/javafx-sdk-18/lib/javafx.web.jar"
-        
-        // JavaFx for Windows
-        // "lib/**/*.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.base.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.controls.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.fxml.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.graphics.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.media.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.swing.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.web.jar",
-        // "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx-swt.jar"
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.base.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.controls.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.fxml.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.graphics.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.media.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.swing.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx.web.jar",
+        "c:\\Program Files\\Java\\javafx-sdk-17.0.1\\lib\\javafx-swt.jar"
     ],
     // For mac path to the java JDK
-    "java.dependency.packagePresentation": "hierarchical",
-    "java.home": "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
+    // "java.dependency.packagePresentation": "hierarchical",
+    // "java.home": "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
     
 
 }
