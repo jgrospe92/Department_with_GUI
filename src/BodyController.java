@@ -1389,9 +1389,7 @@ public class BodyController {
                         teacherNotInDept = true;
                         obsDeanList.add(obsDeptList.get(i).getTeacherList().get(j));
 
-                     
-                     
-                        initializeDept(obsDeptList); // remove ths
+                        //initializeDept(obsDeptList); // remove ths
                         
                         break;
                     }
@@ -1401,9 +1399,6 @@ public class BodyController {
             obsDeptList.get(i).showInfo();
         }
         initializeDept(obsDeptList); 
-        for(Department dep: departmentList) {
-            dep.showInfo();
-        }
         //initializeDean(obsTeacherList);
         for(int i = 0; i < obsDeanList.size(); i ++) {
             obsDeanList.get(i).display();
@@ -1411,7 +1406,7 @@ public class BodyController {
         if (foundIt && teacherNotInDept) {
             System.out.println("found it");
         } else {
-            PKDoesNotExist();
+            invalidDean();
         }
     
     
@@ -1427,6 +1422,19 @@ public class BodyController {
         ExceptionHandling pkConstraint = new ExceptionHandling("Department ID must be unique");
         System.out.println(pkConstraint.getMessage());
     }
+    // Method for Invalid Dean assignment
+    private void invalidDean(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Invalid Dean Assignment");
+        alert.setHeaderText("Error");
+        alert.setContentText("You can only assign a Teacher that belongs to the same Department" + "\n" +
+        "Make sure the Department Exist");
+        // alert.setHeight(120);
+        // alert.setWidth(100);
+        alert.showAndWait();
+        ExceptionHandling pkConstraint = new ExceptionHandling("Invalid Dean assignemnt");
+    }
+        
     // Method for Searching Teacher
     private void searchTeacher(){
         Teacher currentTeacher = new Teacher();
