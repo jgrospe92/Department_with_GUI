@@ -450,6 +450,8 @@ public class BodyController {
     @FXML private TableColumn<Department, ArrayList<String>> tblVdisplayStu;
     @FXML private TextField tfDisplayID;
     @FXML private Button btnDisplaySub;
+    // About
+    @FXML private MenuItem menuAbout;
 
 
 
@@ -1011,8 +1013,17 @@ public class BodyController {
             hideDelStu();
             btnUpdateStu.setVisible(false);
             showSearchStu();
+        } // About tab
+        else if(event.getSource() == menuAbout) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Info");
+            alert.setHeaderText("Programming Project");
+            alert.setContentText("Project by: Jeffrey, Philip" + "\n" +
+            "Check Github for Latest Update: https://github.com/jgrospe92/Department_with_GUI" + "\n" +
+            "version: 4.0");
+            alert.show();
         }
- 
+        
     }
     // Button Action
     public void btnAction(ActionEvent event) {
