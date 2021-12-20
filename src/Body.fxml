@@ -645,7 +645,7 @@
                               <TextField fx:id="tfStaffStall1" layoutX="10.0" layoutY="238.0" visible="false" />
                            </children>
                         </VBox>
-                        <Button fx:id="btnAddTeach11" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Button fx:id="btnAddStu" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
                         <Label fx:id="lblImportStu" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
                            <font>
                               <Font size="15.0" />
@@ -653,13 +653,13 @@
                         </Label>
                         <TextField fx:id="tfImportStu" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
                         <Button fx:id="btnImportStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
-                        <Label fx:id="lblExportTeacher11" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                        <Label fx:id="lblExportStu" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfExportTeacher11" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
-                        <Button fx:id="btnExportTeacher11" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <TextField fx:id="tfExportStu" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExportStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
                         <Label fx:id="lblSearchTeacher11" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
                            <font>
                               <Font size="15.0" />
@@ -690,21 +690,21 @@
                         <TextField fx:id="tfExpoStaff1" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
                         <Button fx:id="btnExpoStaff1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
                         <Button fx:id="btnAddStaff1" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
-                        <Label fx:id="lblDelStaff1" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                        <Label fx:id="lblDelStu" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfDelStaff1" layoutX="69.0" layoutY="299.0" promptText="enter Staff Id" visible="false" />
-                        <Button fx:id="btnDelStaff1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
-                        <Button fx:id="btnUpdateStaff1" layoutX="146.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
-                        <Label fx:id="lblSStaff1" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                        <TextField fx:id="tfDelStu" layoutX="69.0" layoutY="299.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnDelStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Button fx:id="btnUpdateStu" layoutX="146.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblSearchStu" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="tfSStaff1" layoutX="69.0" layoutY="319.0" promptText="enter Staff Id" visible="false" />
-                        <Button fx:id="btnSStaff1" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <TextField fx:id="tfSearchStu" layoutX="69.0" layoutY="319.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnSearchStu" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
                      </children>
                   </AnchorPane>
                </content>

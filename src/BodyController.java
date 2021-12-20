@@ -423,6 +423,23 @@ public class BodyController {
     @FXML private Label lblImportStu;
     @FXML private TextField tfImportStu;
     @FXML private Button btnImportStu;
+    // Export Function
+    @FXML private Label lblExportStu;
+    @FXML private TextField tfExportStu;
+    @FXML private Button btnExportStu;
+    // Import Function
+    @FXML private Button btnAddStu;
+    // Delete Function
+    @FXML private Label lblDelStu;
+    @FXML private TextField tfDelStu;
+    @FXML private Button btnDelStu;
+    // Update Function
+    @FXML private Button btnUpdateStu;
+    // Search function
+    @FXML private Label lblSearchStu;
+    @FXML private TextField tfSearchStu;
+    @FXML private Button btnSearchStu;
+    
 
     Stage stage;
 
@@ -494,6 +511,37 @@ public class BodyController {
         tblVstuFK.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
         tvStudent.setItems(student);
     }
+    private void showSearchStu(){
+        lblSearchStu.setVisible(true);
+        tfSearchStu.setVisible(true);
+        btnSearchStu.setVisible(true);
+    }
+    private void hideSearchStu(){
+        lblSearchStu.setVisible(false);
+        tfSearchStu.setVisible(false);
+        btnSearchStu.setVisible(false);
+    }
+    private void showDelStu(){
+        lblDelStu.setVisible(true);
+        tfDelStu.setVisible(true);
+        btnDelStu.setVisible(true);
+    }
+    private void hideDelStu(){
+        lblDelStu.setVisible(false);
+        tfDelStu.setVisible(false);
+        btnDelStu.setVisible(false);
+    }
+    private void showExportStu(){
+        lblExportStu.setVisible(true);
+        tfExportStu.setVisible(true);
+        btnExportStu.setVisible(true);
+    }
+    private void hideExportStu(){
+        lblExportStu.setVisible(false);
+        tfExportStu.setVisible(false);
+        btnExportStu.setVisible(false);
+    }
+
     private void showImpStu(){
         lblImportStu.setVisible(true);
         tfImportStu.setVisible(true);
@@ -874,6 +922,45 @@ public class BodyController {
         } // Student
         else if (event.getSource() == menuImpStu) {
             showImpStu();
+            btnAddStu.setVisible(false);
+            hideExportStu();
+            btnUpdateStu.setVisible(false);
+            hideDelStu();
+            hideSearchStu();
+        } else if (event.getSource() == menuExpoStu) {
+            hideImpStu();
+            showExportStu();
+            hideDelStu();
+            btnUpdateStu.setVisible(false);
+            btnAddStu.setVisible(false);
+            hideSearchStu();
+        } else if (event.getSource() == menuAddStu) {
+            hideImpStu();
+            btnUpdateStu.setVisible(false);
+            hideExportStu();
+            btnAddStu.setVisible(true);
+            hideSearchStu();
+        } else if (event.getSource() == menuDelStu) {
+            hideImpStu();
+            hideExportStu();
+            btnAddStu.setVisible(false);
+            showDelStu();
+            btnUpdateStu.setVisible(false);
+            hideSearchStu();
+        } else if (event.getSource() == menuUpdateStu) {
+            hideImpStu();
+            hideExportStu();
+            btnAddStu.setVisible(false);
+            hideDelStu();
+            btnUpdateStu.setVisible(true);
+            hideSearchStu();
+        } else if (event.getSource() == menuSStu) {
+            hideImpStu();
+            hideExportStu();
+            btnAddStu.setVisible(false);
+            hideDelStu();
+            btnUpdateStu.setVisible(false);
+            showSearchStu();
         }
  
     }
@@ -1073,6 +1160,106 @@ public class BodyController {
             obsStudentList = FXCollections.observableArrayList(studentList);
             initializeStudent(obsStudentList);
             hideImpStaff();
+        }
+        if (event.getSource() == btnExportStu) {
+            System.out.println("Exporting");
+            FileReadandWrite exportStu = new FileReadandWrite();
+            String filename = tfExportStu.getText();
+            exportStu.fileExportStudent(filename, new ArrayList<>(obsStudentList));
+            hideExportStu();
+        }
+        if (event.getSource() == btnAddStu) {
+            System.out.println("Add Student");
+            addBtnStu();
+            btnAddStaff.setVisible(false);
+        }
+        if (event.getSource() == btnDelStu) {
+            System.out.println("delete stu");
+            for (int i = 0; i < obsStudentList.size(); i++) {
+                if (obsStudentList.get(i).getId() == Integer.parseInt(tfDelStu.getText())){
+                    obsStudentList.remove(i);
+                }
+            }
+            hideDelTeacher();
+            tfDelStu.clear();
+        }
+        if (event.getSource() == btnUpdateStu) {
+            System.out.println("update student");
+            int id = Integer.parseInt(tfStuID.getText());
+            String name = tfStuName.getText();
+            int age = Integer.parseInt(tfStuAge.getText());
+            String gender = tfStuGender.getText();
+            String course = tfStuCourse.getText();
+            int semester = Integer.parseInt(tfStuSem.getText());
+            int fk = Integer.parseInt(tfStuFK.getText());
+            Student updateStu = new Student(id, name, age, gender, course, semester, fk);
+
+            Department relation = new Department(updateStu.getFkDeptID());
+            if (departmentList.contains(relation)){
+
+                for (int i = 0 ; i < obsStudentList.size(); i++) {
+                    if(obsStudentList.get(i).getId() == id) {
+                        obsStudentList.set(i,updateStu);
+                    }
+                }
+            } else {
+                PKDoesNotExist();
+            }
+        }
+        if (event.getSource() == btnSearchStu) {
+            System.out.println("search student");
+            searchStudent();
+        }
+    }
+    private void searchStudent(){
+        Student currentStu = new Student();
+        Iterator<Student> iterator = obsStudentList.iterator();
+
+        while(iterator.hasNext()) {
+            currentStu = iterator.next();
+            if (currentStu.getId() == Integer.parseInt(tfSearchStu.getText())){
+
+                tfStuID.setText(Integer.toString(currentStu.getId()));
+                tfStuName.setText(currentStu.getName());
+                tfStuAge.setText(Integer.toString(currentStu.getAge()));
+                tfStuGender.setText(currentStu.getGender());
+                tfStuCourse.setText(currentStu.getCourse());
+                tfStuSem.setText(Integer.toString(currentStu.getSemester()));
+                tfStuFK.setText(Integer.toString(currentStu.getFkDeptID()));
+                
+            }
+        }
+
+
+    }
+    private void addBtnStu(){
+        Student addStu;
+        int id = Integer.parseInt(tfStuID.getText());
+        String name = tfStuName.getText();
+        int age = Integer.parseInt(tfStuAge.getText());
+        String gender = tfStuGender.getText();
+        String course = tfStuCourse.getText();
+        int semester = Integer.parseInt(tfStuSem.getText());
+        int fk = Integer.parseInt(tfStuFK.getText());
+
+        addStu = new Student(id, name, age, gender, course, semester, fk);
+        Department relation = new Department(addStu.getFkDeptID());
+        Student fkT = new Student(addStu.getId(), addStu.getFkDeptID());
+
+        if (departmentList.contains(relation) && !studentList.contains(fkT)) {
+            obsStudentList.add(addStu);
+            studentList.add(addStu);
+            initializeStudent(obsStudentList);
+            // Add this Teacher directly to the corresponding department.
+            for (int i = 0;i < obsDeptList.size(); i++ ) {
+                if (obsDeptList.get(i).getId() == addStu.getFkDeptID()) {
+                    obsDeptList.get(i).getStudentList().add(addStu);
+                }
+            }
+
+        } else {
+            PKDoesNotExist();
+           
         }
     }
     private  void searchStaff(){
@@ -1309,7 +1496,10 @@ public class BodyController {
         if (event.getSource() == tabStaff) {
             lblSection.setText("Section: " + tabStaff.getText());
         }
-      
+        if (event.getSource() == tabStudent) {
+            lblSection.setText("Section: " + tabStudent.getText());
+
+        }
       
     }
 
