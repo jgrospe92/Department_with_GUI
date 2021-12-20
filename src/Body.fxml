@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
+<AnchorPane fx:id="bodyPane" maxHeight="484.0" maxWidth="845.0" prefHeight="484.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
    <children>
       <Label fx:id="labelWelcome" layoutX="14.0" layoutY="451.0" text="welcome," />
       <Label fx:id="lblSection" layoutX="664.0" layoutY="451.0" text="section:" />

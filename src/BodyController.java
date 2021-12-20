@@ -1062,9 +1062,12 @@ public class BodyController {
                 obsDeptList.add(newDept);
                 departmentList.add(newDept);
                 initializeDept(obsDeptList);
+                tfId.clear();
+                tfDesc.clear();
             } else {
                 primaryKeyConstraint();
             }
+            
         }
         if (event.getSource() == btnSearchDept) {
             searchItem();
@@ -1098,6 +1101,7 @@ public class BodyController {
         if (event.getSource() == btnAddTeach) {
             addBtnTeacher();
            btnAddTeach.setVisible(false);
+          
         }
         if (event.getSource() == btnImpoTeach) {
             FileReadandWrite importTeacher = new FileReadandWrite();
@@ -1166,6 +1170,8 @@ public class BodyController {
         if (event.getSource() == btnAddStaff) {
             addBtnStaff();
             btnAddStaff.setVisible(false);
+           
+
         }
         if (event.getSource() == btnDelStaff) {
             for (int i = 0; i < obsStaff.size(); i++) {
@@ -1219,6 +1225,7 @@ public class BodyController {
         if (event.getSource() == btnAddStu) {
             addBtnStu();
             btnAddStaff.setVisible(false);
+          
         }
         if (event.getSource() == btnDelStu) {
             for (int i = 0; i < obsStudentList.size(); i++) {
@@ -1313,6 +1320,12 @@ public class BodyController {
                     obsDeptList.get(i).getStudentList().add(addStu);
                 }
             }
+            tfStuID.clear();
+            tfStuName.clear();
+            tfStuAge.clear();
+            tfStuGender.clear();
+            tfStuSem.clear();
+            tfStuFK.clear();
 
         } else {
             PKDoesNotExist();
@@ -1364,7 +1377,13 @@ public class BodyController {
                         obsDeptList.get(i).getStaffList().add(addStaff);
                     }
                 }
-    
+                tfStaffID.clear();
+                tfStaffName.clear();
+                tfStaffAge.clear();
+                tfStaffGender.clear();
+                tfStaffDuty.clear();
+                tfStaffWorkload.clear();
+                tfStaffFK.clear();
             } else {
                 PKDoesNotExist();
                
@@ -1487,7 +1506,13 @@ public class BodyController {
                     obsDeptList.get(i).getTeacherList().add(addTeacher);
                 }
             }
-
+            tfTeacherId.clear();
+            tfTeacherName.clear();
+            tfTeacherAge.clear();
+            tfTeacherSpec.clear();
+            tfTeacherDeg.clear();
+            tfTeacherFk.clear();
+            tfTeacherGender.clear();
         } else {
             PKDoesNotExist();
            
