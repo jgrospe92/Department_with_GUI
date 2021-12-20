@@ -1,21 +1,31 @@
 public class Student extends Person{
     private String course;
     private int semester;
+    private int fkDeptID;
 
      // empty constructor
      public Student(){
 
     }
-    // Constructor for ID
-    public Student(int id){super(id);}
-
-    //Constructor
-    public Student(int id, String name, int age, String gender, String course, int semester) {
+     //Constructor
+     public Student(int id, String name, int age, String gender, String course, int semester, int fk) {
         super(id, name, age, gender);
         this.course = course;
         this.semester = semester;
+        this.fkDeptID = fk;
     }
-   
+    // Constructor for ID and FK
+    public Student(int id, int fk){
+        super(id);
+        this.fkDeptID = fk;
+
+    }
+
+    public Student(int fk) {
+        this.fkDeptID = fk;
+    }
+
+
 
     //Setters
     public void setCourse(String course) {
@@ -24,6 +34,9 @@ public class Student extends Person{
 
     public void setSemester(int semester) {
         this.semester = semester;
+    }
+    public void getFkDeptID(int fk){
+        this.fkDeptID = fk;
     }
 
     //Getters
@@ -35,6 +48,10 @@ public class Student extends Person{
         return semester;
     }
 
+    public int getFkDeptID(){
+        return this.fkDeptID;
+    }
+
     @Override
     public void display(){
         super.display();
@@ -44,7 +61,7 @@ public class Student extends Person{
 
     @Override
     public String formatted(){
-        return super.formatted() + "," + course + "," + semester;
+        return super.formatted() + "," + course + "," + semester + "," + fkDeptID;
     }
 
 

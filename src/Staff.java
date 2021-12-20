@@ -1,6 +1,8 @@
 public class Staff extends Person implements PayRoll{
     private String duty;
     private int workload;
+    private double salary;
+    private int fkDeptID;
 
     // Empty Constructor
     public Staff(){
@@ -8,14 +10,22 @@ public class Staff extends Person implements PayRoll{
     }
 
     // Constructor
-    public Staff(int id, String name, int age, String gender, String duty, int workload) {
+    public Staff(int id, String name, int age, String gender, String duty, int workload, int pk) {
         super(id, name, age, gender);
         this.duty = duty;
         this.workload = workload;
+        this.salary = computePayRoll();
+        this.fkDeptID = pk;
+        
     }
     // Constructor for ID
-    public Staff(int id){
+    public Staff(int id, int fk ) {
         super(id);
+        this.fkDeptID = fk;
+    }
+
+    public Staff(int fk){
+        this.fkDeptID = fk;
     }
 
     //Setters
@@ -26,6 +36,9 @@ public class Staff extends Person implements PayRoll{
     public void setWorkload(int workload) {
         this.workload = workload;
     }
+    public void setFk(int fk){
+        this.fkDeptID = fk;
+    }
 
     //Getters
     public String getDuty() {
@@ -34,6 +47,12 @@ public class Staff extends Person implements PayRoll{
     
     public int getWorkload() {
         return workload;
+    }
+    public double getSalary(){
+        return this.salary;
+    }
+    public int getFkDeptID(){
+        return this.fkDeptID;
     }
     
     //Methods
@@ -46,18 +65,20 @@ public class Staff extends Person implements PayRoll{
         } else {
             System.out.println("Workload exceeds limit");
         }
-        return result;
+        return result = Math.round(result * 100.0)/100.0;
     }
     @Override
     public void display(){
         super.display();
-        System.out.println("Course: " + this.duty + "\n" + 
-                            "Semester: " + this.workload + "\n");
+        System.out.println("Duty: " + this.duty + "\n" + 
+                            "Workload: " + this.workload + "\n" +
+                            "Salary: " + this.salary +
+                            "FK: " + this.fkDeptID + "\n");
     }
 
     @Override
     public String formatted(){
-        return super.formatted() + "," + duty + "," + workload;
+        return super.formatted() + "," + duty + "," + workload + "," + fkDeptID;
     }
 
 

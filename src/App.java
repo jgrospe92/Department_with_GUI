@@ -1,36 +1,38 @@
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class App extends Application{
-    public static void main(String[] args) {
-
-        // ArrayList 
-        ArrayList<Department> departmentList = new ArrayList<>(); 
-        ArrayList<Teacher> teacherLit = new ArrayList<>();
-        ArrayList<Student> studentList = new ArrayList<>();
-        ArrayList<Staff> StaffList = new ArrayList<>();
-
-        launch(args);
-        
-    }
-    
+public class App extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-       Parent root = FXMLLoader.load(getClass().getResource("FXML.fxml"));
-       Scene scene = new Scene(root);
-       stage.setScene(scene);
-       stage.show();
-        
+    public void start(Stage primaryStage) throws Exception {
+      
+        Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml")); // use / to check outside
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Vanier College");
+
+        Image icon = new Image("Image/programming.png"); // Image needs to be inside the src folder
+        primaryStage.getIcons().add(icon); // set it
+
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public static void main(String[] args) {
+
+       
+        launch(args);
+
     }
 
   
- 
+        
+    
+
 }

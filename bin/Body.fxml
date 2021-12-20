@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
+   <children>
+      <Label fx:id="labelWelcome" layoutX="14.0" layoutY="451.0" text="welcome," />
+      <Label fx:id="lblSection" layoutX="706.0" layoutY="451.0" text="section:" />
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="menuSave" mnemonicParsing="false" onAction="#tabAction" text="save" />
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#tabAction" text="logout" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Department">
+            <items>
+              <MenuItem fx:id="menuImpDept" mnemonicParsing="false" onAction="#tabAction" text="import" />
+                  <MenuItem fx:id="menuExport" mnemonicParsing="false" onAction="#tabAction" text="export" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuAdd" mnemonicParsing="false" onAction="#tabAction" text="add" />
+                  <MenuItem fx:id="menuDelete" mnemonicParsing="false" onAction="#tabAction" text="delete" />
+                  <MenuItem fx:id="menuUpdate" mnemonicParsing="false" onAction="#tabAction" text="update" />
+                  <MenuItem fx:id="menuSearch" mnemonicParsing="false" onAction="#tabAction" text="search" />
+                  <MenuItem fx:id="menuItemAssDean" mnemonicParsing="false" onAction="#tabAction" text="assign dean" />
+                  <MenuItem fx:id="menuDisplayDept" mnemonicParsing="false" onAction="#tabAction" text="view" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Teacher">
+               <items>
+                  <MenuItem fx:id="menuImpTeacher" mnemonicParsing="false" onAction="#tabAction" text="import" />
+                  <MenuItem fx:id="menuExportTeach" mnemonicParsing="false" onAction="#tabAction" text="export" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuTeacherAdd" mnemonicParsing="false" onAction="#tabAction" text="add" />
+                  <MenuItem fx:id="menuDelTeacher" mnemonicParsing="false" onAction="#tabAction" text="delete" />
+                  <MenuItem fx:id="menuUpdateTeach" mnemonicParsing="false" onAction="#tabAction" text="update" />
+                  <MenuItem fx:id="menuSearchTeach" mnemonicParsing="false" onAction="#tabAction" text="search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Staff">
+               <items>
+                  <MenuItem fx:id="menuImpStaff" mnemonicParsing="false" onAction="#tabAction" text="import" />
+                  <MenuItem fx:id="menuExportStaff" mnemonicParsing="false" onAction="#tabAction" text="export" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuAddStaff" mnemonicParsing="false" onAction="#tabAction" text="add" />
+                  <MenuItem fx:id="menuDelStaff" mnemonicParsing="false" onAction="#tabAction" text="delete" />
+                  <MenuItem fx:id="menuUpdateStaff" mnemonicParsing="false" onAction="#tabAction" text="update" />
+                  <MenuItem fx:id="menuSStaff" mnemonicParsing="false" onAction="#tabAction" text="search" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Student">
+               <items>
+                  <MenuItem fx:id="menuImpStu" mnemonicParsing="false" onAction="#tabAction" text="import" />
+                  <MenuItem fx:id="menuExpoStu" mnemonicParsing="false" onAction="#tabAction" text="export" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuAddStu" mnemonicParsing="false" onAction="#tabAction" text="add" />
+                  <MenuItem fx:id="menuDelStu" mnemonicParsing="false" onAction="#tabAction" text="delete" />
+                  <MenuItem fx:id="menuUpdateStu" mnemonicParsing="false" onAction="#tabAction" text="update" />
+                  <MenuItem fx:id="menuSStu" mnemonicParsing="false" onAction="#tabAction" text="search" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="mainTabPane" layoutX="-3.0" layoutY="28.0" prefHeight="411.0" prefWidth="845.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabDepartment" onSelectionChanged="#displaySection" text="Department">
+            <content>
+              <AnchorPane fx:id="searchDept" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="768.0">
+                     <children>
+                        <VBox layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="93.0">
+                           <children>
+                              <Label text="ID:">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Label>
+                              <Label prefHeight="40.0" prefWidth="98.0" text="Description:">
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblDean" text="Dean:">
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="103.0" layoutY="12.0" prefHeight="104.0" prefWidth="148.0">
+                           <children>
+                              <TextField fx:id="tfId" promptText="enter id">
+                                 <VBox.margin>
+                                    <Insets bottom="16.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfDesc" promptText="enter decription">
+                                 <VBox.margin>
+                                    <Insets bottom="16.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfDean" promptText="enter Teacher" />
+                           </children>
+                        </VBox>
+                        <TableView fx:id="tvDept" layoutX="392.0" layoutY="12.0" prefHeight="265.0" prefWidth="436.0">
+                          <columns>
+                            <TableColumn fx:id="tblViewID" prefWidth="96.0" text="ID" />
+                            <TableColumn fx:id="tblViewDesc" prefWidth="271.0" text="Description" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btnAddDept" layoutX="213.0" layoutY="131.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblImport" layoutX="7.0" layoutY="202.0" text="Import" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tftImportName" layoutX="63.0" layoutY="200.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnSubmit" layoutX="168.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblSearch" layoutX="7.0" layoutY="225.0" text="search" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tftSearchDept" layoutX="63.0" layoutY="223.0" prefHeight="26.0" prefWidth="149.0" promptText="enter ID" visible="false" />
+                        <Button fx:id="btnSearchDept" layoutX="157.0" layoutY="259.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <Button fx:id="btnDelete" layoutX="160.0" layoutY="253.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Button fx:id="btnModify" layoutX="197.0" layoutY="131.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Button fx:id="btnExport" layoutX="168.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Button fx:id="btnAssDean" layoutX="223.0" layoutY="141.0" mnemonicParsing="false" onAction="#btnAction" text="assign" visible="false" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabDean" onSelectionChanged="#tabSwitchAction" text="Dean">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvDean" layoutX="81.0" layoutY="24.0" prefHeight="338.0" prefWidth="683.0">
+                          <columns>
+                            <TableColumn fx:id="tblViewDeanID" prefWidth="60.0" text="ID" />
+                            <TableColumn fx:id="tblViewDeanName" prefWidth="77.0" text="Name" />
+                              <TableColumn fx:id="tblViewDeanAge" prefWidth="65.0" text="Age" />
+                              <TableColumn fx:id="tblViewDeanGender" minWidth="0.0" prefWidth="58.0" text="Gender" />
+                              <TableColumn fx:id="tblViewDeanSpec" prefWidth="149.0" text="Speciality" />
+                              <TableColumn fx:id="tblViewDeanDegree" minWidth="4.0" prefWidth="103.0" text="Degree" />
+                              <TableColumn fx:id="tblViewDeanSal" prefWidth="95.0" text="Salary" />
+                              <TableColumn fx:id="tblViewDeanFK" prefWidth="75.0" text="FK" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabTeacher" onSelectionChanged="#tabSwitchAction" text="Teacher">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvTeacher" layoutX="237.0" layoutY="7.0" prefHeight="282.0" prefWidth="608.0">
+                           <columns>
+                              <TableColumn fx:id="tblViewDeanID1" prefWidth="60.0" text="ID" />
+                              <TableColumn fx:id="tblViewDeanName1" prefWidth="77.0" text="Name" />
+                              <TableColumn fx:id="tblViewDeanAge1" prefWidth="65.0" text="Age" />
+                              <TableColumn fx:id="tblViewDeanGender1" minWidth="0.0" prefWidth="58.0" text="Gender" />
+                              <TableColumn fx:id="tblViewDeanSpec1" prefWidth="149.0" text="Speciality" />
+                              <TableColumn fx:id="tblViewDeanDegree1" minWidth="4.0" prefWidth="103.0" text="Degree" />
+                              <TableColumn fx:id="tblViewDeanSal1" prefWidth="95.0" text="Salary" />
+                              <TableColumn fx:id="tblViewDeanFK1" prefWidth="75.0" text="FK" />
+                           </columns>
+                        </TableView>
+                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="296.0" prefWidth="63.0">
+                           <children>
+                              <Label text="ID:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Name:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="47.0" text="Age:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="84.0" text="Gender:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="121.0" text="Speciality">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="158.0" text="Degree">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="195.0" text="FK">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblTempSal" layoutX="10.0" layoutY="238.0" text="Salary" visible="false">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="77.0" layoutY="7.0" prefHeight="309.0" prefWidth="126.0">
+                           <children>
+                              <TextField fx:id="tfTeacherId" promptText="enter ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherName" layoutX="10.0" layoutY="10.0" promptText="enter name">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherAge" layoutX="10.0" layoutY="48.0" promptText="enter age">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherGender" layoutX="10.0" layoutY="86.0" promptText="male or female">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherSpec" layoutX="10.0" layoutY="124.0" promptText="enter speciality">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherDeg" layoutX="10.0" layoutY="162.0" promptText="PhD/Master/bachelor">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfTeacherFk" layoutX="10.0" layoutY="200.0" promptText="enter dept ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin></TextField>
+                              <TextField fx:id="tfTempSal" layoutX="10.0" layoutY="238.0" visible="false" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnAddTeach" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblImportTeach" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImpTeach" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImpoTeach" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExportTeacher" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExportTeacher" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExportTeacher" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Label fx:id="lblSearchTeacher" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSearchTeacher" layoutX="69.0" layoutY="319.0" promptText="enter Teacher ID" visible="false" />
+                        <Button fx:id="btnSearchTeacher" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <Button fx:id="btnUpdateTeacher" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblDelTeacher" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelTeacher" layoutX="69.0" layoutY="299.0" promptText="enter Teacher Id" visible="false" />
+                        <Button fx:id="btnDelTeacher" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabStaff" onSelectionChanged="#tabSwitchAction" text="Staff">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvStaff" layoutX="237.0" layoutY="7.0" prefHeight="282.0" prefWidth="608.0">
+                           <columns>
+                              <TableColumn fx:id="tblViewStaffID" prefWidth="60.0" text="ID" />
+                              <TableColumn fx:id="tblVstaffName" prefWidth="77.0" text="Name" />
+                              <TableColumn fx:id="tblVstaffAge" prefWidth="65.0" text="Age" />
+                              <TableColumn fx:id="tblVstaffGender" minWidth="0.0" prefWidth="58.0" text="Gender" />
+                              <TableColumn fx:id="tblVstaffDuty" prefWidth="149.0" text="Duty" />
+                              <TableColumn fx:id="tblVstaffWKL" minWidth="4.0" prefWidth="103.0" text="Workload" />
+                              <TableColumn fx:id="tblVstaffSal" prefWidth="95.0" text="Salary" />
+                              <TableColumn fx:id="tblVstaffFK" prefWidth="75.0" text="FK" />
+                           </columns>
+                        </TableView>
+                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="296.0" prefWidth="63.0">
+                           <children>
+                              <Label text="ID:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Name:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="47.0" text="Age:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="84.0" text="Gender:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="121.0" text="Duty">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="158.0" text="Workload">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="195.0" text="FK">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblStaffSal" layoutX="10.0" layoutY="238.0" text="Salary" visible="false">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="76.0" layoutY="7.0" prefHeight="309.0" prefWidth="126.0">
+                           <children>
+                              <TextField fx:id="tfStaffID" promptText="enter ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffName" layoutX="10.0" layoutY="10.0" promptText="enter name">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffAge" layoutX="10.0" layoutY="48.0" promptText="enter age">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffGender" layoutX="10.0" layoutY="86.0" promptText="male or female">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffDuty" layoutX="10.0" layoutY="124.0" promptText="enter duty">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffWorkload" layoutX="10.0" layoutY="162.0" promptText="enter worked hours">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffFK" layoutX="10.0" layoutY="200.0" promptText="enter dept ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffStall" layoutX="10.0" layoutY="238.0" visible="false" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnAddTeach1" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblImportTeach1" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImpTeach1" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImpoTeach1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExportTeacher1" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExportTeacher1" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExportTeacher1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Label fx:id="lblSearchTeacher1" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSearchTeacher1" layoutX="69.0" layoutY="319.0" promptText="enter Teacher ID" visible="false" />
+                        <Button fx:id="btnSearchTeacher1" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <Button fx:id="btnUpdateTeacher1" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblDelTeacher1" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelTeacher1" layoutX="69.0" layoutY="299.0" promptText="enter Teacher Id" visible="false" />
+                        <Button fx:id="btnDelTeacher1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Label fx:id="lblImportStaff" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImpStaff" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImpStaff" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExpoStaff" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExpoStaff" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExpoStaff" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Button fx:id="btnAddStaff" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblDelStaff" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelStaff" layoutX="69.0" layoutY="299.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnDelStaff" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Button fx:id="btnUpdateStaff" layoutX="146.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblSStaff" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSStaff" layoutX="69.0" layoutY="319.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnSStaff" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabStudent" onSelectionChanged="#tabSwitchAction" text="Student">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvStudent" layoutX="237.0" layoutY="7.0" prefHeight="282.0" prefWidth="608.0">
+                           <columns>
+                              <TableColumn fx:id="tblVstuID" prefWidth="60.0" text="ID" />
+                              <TableColumn fx:id="tblVstuName" prefWidth="141.0" text="Name" />
+                              <TableColumn fx:id="tblVstuAge" prefWidth="59.0" text="Age" />
+                              <TableColumn fx:id="tblVstuGender" minWidth="0.0" prefWidth="70.0" text="Gender" />
+                              <TableColumn fx:id="tblVstuCourse" prefWidth="139.0" text="Course" />
+                              <TableColumn fx:id="tblVstuSem" minWidth="4.0" prefWidth="63.0" text="Semester" />
+                              <TableColumn fx:id="tblVstuFK" prefWidth="75.0" text="FK" />
+                           </columns>
+                        </TableView>
+                        <VBox layoutX="14.0" layoutY="11.0" prefHeight="296.0" prefWidth="63.0">
+                           <children>
+                              <Label text="ID:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Name:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="47.0" text="Age:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="84.0" text="Gender:">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="121.0" text="Course">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="158.0" text="Semester">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="195.0" text="FK">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblStaffSal1" layoutX="10.0" layoutY="238.0" text="Salary" visible="false">
+                                 <padding>
+                                    <Insets bottom="20.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="76.0" layoutY="7.0" prefHeight="309.0" prefWidth="126.0">
+                           <children>
+                              <TextField fx:id="tfStuID" promptText="enter ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuName" layoutX="10.0" layoutY="10.0" promptText="enter name">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuAge" layoutX="10.0" layoutY="48.0" promptText="enter age">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuGender" layoutX="10.0" layoutY="86.0" promptText="male or female">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuCourse" layoutX="10.0" layoutY="124.0" promptText="enter course">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuSem" layoutX="10.0" layoutY="162.0" promptText="enter semester">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStuFK" layoutX="10.0" layoutY="200.0" promptText="enter dept ID">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tfStaffStall1" layoutX="10.0" layoutY="238.0" visible="false" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnAddStu" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblImportStu" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImportStu" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImportStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExportStu" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExportStu" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExportStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Label fx:id="lblSearchTeacher11" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSearchTeacher11" layoutX="69.0" layoutY="319.0" promptText="enter Teacher ID" visible="false" />
+                        <Button fx:id="btnSearchTeacher11" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                        <Button fx:id="btnUpdateTeacher11" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblDelTeacher11" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelTeacher11" layoutX="69.0" layoutY="299.0" promptText="enter Teacher Id" visible="false" />
+                        <Button fx:id="btnDelTeacher11" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Label fx:id="lblImportStaff1" layoutX="14.0" layoutY="302.0" text="Import:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfImpStaff1" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnImpStaff1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="import" visible="false" />
+                        <Label fx:id="lblExpoStaff1" layoutX="14.0" layoutY="302.0" text="export:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfExpoStaff1" layoutX="69.0" layoutY="299.0" promptText="enter filename" visible="false" />
+                        <Button fx:id="btnExpoStaff1" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="export" visible="false" />
+                        <Button fx:id="btnAddStaff1" layoutX="165.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="add" visible="false" />
+                        <Label fx:id="lblDelStu" layoutX="14.0" layoutY="302.0" text="delete:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDelStu" layoutX="69.0" layoutY="299.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnDelStu" layoutX="176.0" layoutY="333.0" mnemonicParsing="false" onAction="#btnAction" text="delete" visible="false" />
+                        <Button fx:id="btnUpdateStu" layoutX="146.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnAction" text="update" visible="false" />
+                        <Label fx:id="lblSearchStu" layoutX="14.0" layoutY="322.0" text="search:" visible="false">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfSearchStu" layoutX="69.0" layoutY="319.0" promptText="enter Staff Id" visible="false" />
+                        <Button fx:id="btnSearchStu" layoutX="176.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAction" text="search" visible="false" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabDisplayDept" disable="true" onSelectionChanged="#tabSwitchAction" text="View Department">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvDisplayDept" layoutX="56.0" layoutY="37.0" prefHeight="219.0" prefWidth="733.0">
+                          <columns>
+                            <TableColumn fx:id="tblVdisplayId" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="tblVdisplayDesc" prefWidth="150.0" text="Description" />
+                              <TableColumn fx:id="tblVdisplayDean" prefWidth="75.0" text="Dean" />
+                              <TableColumn fx:id="tblVdisplayTeacher" prefWidth="156.0" text="Teacher(s)" />
+                              <TableColumn fx:id="tblVdisplayStaff" minWidth="0.0" prefWidth="125.0" text="Staff(s)" />
+                              <TableColumn fx:id="tblVdisplayStu" prefWidth="149.0" text="Student(s)" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="95.0" layoutY="291.0" text="ID:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDisplayID" layoutX="121.0" layoutY="288.0" promptText="enter dept ID" />
+                        <Button fx:id="btnDisplaySub" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnAction" text="submit" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
