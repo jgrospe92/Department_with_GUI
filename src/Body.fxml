@@ -19,7 +19,7 @@
 <AnchorPane fx:id="bodyPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BodyController">
    <children>
       <Label fx:id="labelWelcome" layoutX="14.0" layoutY="451.0" text="welcome," />
-      <Label fx:id="lblSection" layoutX="706.0" layoutY="451.0" text="section:" />
+      <Label fx:id="lblSection" layoutX="673.0" layoutY="451.0" text="section:" />
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
