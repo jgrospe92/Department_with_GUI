@@ -436,7 +436,25 @@ public class BodyController {
     @FXML private Label lblSearchStu;
     @FXML private TextField tfSearchStu;
     @FXML private Button btnSearchStu;
-    
+    // Department View
+    @FXML private Tab tabDisplayDept;
+    @FXML private MenuItem menuDisplayDept;
+
+    // TableView
+    @FXML private TableView<Department> tvDisplayDept;
+    @FXML private TableColumn<Department, Integer> tblVdisplayId;
+    @FXML private TableColumn<Department, String> tblVdisplayDesc;
+    @FXML private TableColumn<Department, String> tblVdisplayDean;
+    @FXML private TableColumn<Department, ArrayList<String>> tblVdisplayTeacher;
+    @FXML private TableColumn<Department, ArrayList<String>> tblVdisplayStaff;
+    @FXML private TableColumn<Department, ArrayList<String>> tblVdisplayStu;
+    @FXML private TextField tfDisplayID;
+    @FXML private Button btnDisplaySub;
+
+
+
+
+
 
     Stage stage;
 
@@ -453,6 +471,8 @@ public class BodyController {
     public static ObservableList<Department> deanTempList = FXCollections.observableArrayList(/*departmentList*/);
     public static ObservableList<Staff> obsStaff = FXCollections.observableArrayList();
     public static ObservableList<Student> obsStudentList = FXCollections.observableArrayList();
+    public static ObservableList<Department> obsDisplayDept = FXCollections.observableArrayList(); // Display Dept info
+
 
 
     // Initialize Dept display it to the corresponding table column
@@ -521,6 +541,19 @@ public class BodyController {
         tblViewDeanSal1.setCellValueFactory(new PropertyValueFactory<>("salary"));
         tblViewDeanFK1.setCellValueFactory(new PropertyValueFactory<>("fkDeptID"));
         tvTeacher.setItems(teacher); 
+    }
+    // Initialize Display
+    private void initializeDisplay(ObservableList<Department > dept){
+        
+        tblVdisplayId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tblVdisplayDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tblVdisplayDean.setCellValueFactory(new PropertyValueFactory<>("deanName"));
+        tblVdisplayTeacher.setCellValueFactory(new PropertyValueFactory<>("teacherName"));
+        tblVdisplayStaff.setCellValueFactory(new PropertyValueFactory<>("staff"));
+        tblVdisplayStu.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        tvDisplayDept.setItems(dept);
+
+
     }
     // Methods to show and hide label, TextField & buttons. 
     private void showSearchStu(){
@@ -812,6 +845,8 @@ public class BodyController {
             btnExport.setVisible(false);
             btnModify.setVisible(false);
             showAddDean();
+        } else if (event.getSource() == menuDisplayDept) {
+            tabDisplayDept.setDisable(false);
         }
         // Teacher
         else if (event.getSource() == menuTeacherAdd) {
@@ -1208,7 +1243,19 @@ public class BodyController {
         if (event.getSource() == btnSearchStu) {
             searchStudent();
         }
+        // Display view
+        if (event.getSource() == btnDisplaySub) {
+            obsDisplayDept.clear();
+            for (int i = 0; i < obsDeptList.size(); i++) {
+                if(obsDeptList.get(i).getId() == Integer.parseInt(tfDisplayID.getText())) {
+                    obsDisplayDept.add(obsDeptList.get(i));
+                    initializeDisplay(obsDisplayDept);
+                    
+                }
+            }
+        }
     }
+    
     private void searchStudent(){
         Student currentStu = new Student();
         Iterator<Student> iterator = obsStudentList.iterator();
@@ -1453,7 +1500,12 @@ public class BodyController {
     public void displayName(String username) {
         labelWelcome.setText("Hello: " + username);
     }
-
+    // Method to disable view
+    public void displayView(Event event){
+        if(event.getSource() == tabDisplayDept) {
+            tabDisplayDept.setDisable(true);
+        }
+    }
  
     // Methods to display the active tab
     public void tabSwitchAction(Event event) {
@@ -1483,6 +1535,10 @@ public class BodyController {
             lblSection.setText("Section: " + tabStudent.getText());
 
         }
+        if (event.getSource() == tabDisplayDept) {
+            lblSection.setText("Section: " + tabDisplayDept.getText());
+        }
+
     }
     public void displaySection(){
         lblSection.setText("Section: " + tabDepartment.getText());

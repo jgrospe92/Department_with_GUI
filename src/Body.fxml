@@ -38,6 +38,7 @@
                   <MenuItem fx:id="menuUpdate" mnemonicParsing="false" onAction="#tabAction" text="update" />
                   <MenuItem fx:id="menuSearch" mnemonicParsing="false" onAction="#tabAction" text="search" />
                   <MenuItem fx:id="menuItemAssDean" mnemonicParsing="false" onAction="#tabAction" text="assign dean" />
+                  <MenuItem fx:id="menuDisplayDept" mnemonicParsing="false" onAction="#tabAction" text="view" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Teacher">
@@ -708,6 +709,31 @@
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab fx:id="tabDisplayDept" disable="true" onSelectionChanged="#tabSwitchAction" text="View Department">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tvDisplayDept" layoutX="56.0" layoutY="37.0" prefHeight="219.0" prefWidth="733.0">
+                          <columns>
+                            <TableColumn fx:id="tblVdisplayId" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="tblVdisplayDesc" prefWidth="150.0" text="Description" />
+                              <TableColumn fx:id="tblVdisplayDean" prefWidth="75.0" text="Dean" />
+                              <TableColumn fx:id="tblVdisplayTeacher" prefWidth="156.0" text="Teacher(s)" />
+                              <TableColumn fx:id="tblVdisplayStaff" minWidth="0.0" prefWidth="125.0" text="Staff(s)" />
+                              <TableColumn fx:id="tblVdisplayStu" prefWidth="149.0" text="Student(s)" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="95.0" layoutY="291.0" text="ID:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDisplayID" layoutX="121.0" layoutY="288.0" promptText="enter dept ID" />
+                        <Button fx:id="btnDisplaySub" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnAction" text="submit" />
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>

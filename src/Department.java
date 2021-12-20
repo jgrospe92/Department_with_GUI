@@ -6,6 +6,9 @@ public class Department {
     private String description;
     private Teacher dean;
     private String deanName;
+    private ArrayList<String> teacherName;
+    private ArrayList<String> staff;
+    private ArrayList<String> studentName; 
     // ArrayList
     private ArrayList<Teacher> TeacherList = new ArrayList<>();
     private ArrayList<Student> StudentList = new ArrayList<>();
@@ -19,6 +22,7 @@ public class Department {
     public Department(int id, String description){
         this.id = id;
         this.description = description;
+    
     }
     public Department(Teacher dean){
         this.deanName = dean.getName();
@@ -30,6 +34,9 @@ public class Department {
         this.description = description;
         this.dean = dean;
         this.deanName = dean.getName();
+        this.teacherName = getTeacherName();
+        this.staff = getStaff();
+        this.studentName = getStudentName();
     }
     // ID constructor
     public Department(int id) {
@@ -49,8 +56,41 @@ public class Department {
         return this.dean;
     }
     public String getDeanName(){
-        return this.deanName;
+       try {
+            deanName = dean.getName();
+       } catch(Exception e) {
+           System.err.println(e.getMessage());
+       }
+       return deanName;
     }
+    public ArrayList<String> getTeacherName(){
+        ArrayList<String> name = new ArrayList<>();
+        if (TeacherList.size() != 0) {
+            for (Teacher tt : TeacherList) {
+                name.add(tt.getName());
+            }
+        }
+        return name;
+    }
+
+   public ArrayList<String> getStaff(){
+        ArrayList<String> staffName = new ArrayList<>();
+        if (StaffList.size() != 0) {
+            for (Staff ss : StaffList) {
+                staffName.add(ss.getName());
+            }
+        }
+        return staffName;
+   }
+   public ArrayList<String> getStudentName(){
+    ArrayList<String> stuName = new ArrayList<>();
+    if (StudentList.size() != 0) {
+        for (Student ss : StudentList) {
+            stuName.add(ss.getName());
+        }
+    }
+    return stuName;
+}
 
     public void showInfo(){
         if(getDean() == null){
