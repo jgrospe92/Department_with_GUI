@@ -13,6 +13,8 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
       
+        
+
         Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml")); // use / to check outside
         Scene scene = new Scene(root);
         primaryStage.setTitle("Vanier College");
@@ -24,15 +26,12 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    public static void main(String[] args) {
-
-       
+    public static void main(String[] args) { 
         launch(args);
-
     }
-
-  
-        
-    
-
 }
+
+
+
+
+

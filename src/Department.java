@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Department {
 
+    public static final String Teachlist1 = null;
     private int id;
     private String description;
     private Teacher dean;

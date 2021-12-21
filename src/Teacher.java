@@ -97,7 +97,7 @@ public class Teacher extends Person implements PayRoll{
        String bachelor = this.degree.toLowerCase();
 
         int salDegree = (phd.equals("phd")) ? 112 : (master.equals("master" ) ? 82 : (bachelor.equals("bachelor")) ? 42 : 0); 
-        return (35 * salDegree * 2) * 0.76;
+        return (36 * salDegree * 2) * 0.76;
 
     }
 
