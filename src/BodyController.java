@@ -760,7 +760,7 @@ public class BodyController {
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
-            }else if (alert.showAndWait().get() == noBtn) {
+            }else{
                 stage = (Stage) bodyPane.getScene().getWindow();
                 System.out.println("You are logout");
                 stage.close();
@@ -986,6 +986,7 @@ public class BodyController {
             btnUpdateStu.setVisible(false);
             btnAddStu.setVisible(false);
             hideSearchStu();
+            hideDelStu();
         } else if (event.getSource() == menuAddStu) {
             hideImpStu();
             btnUpdateStu.setVisible(false);
@@ -1020,7 +1021,7 @@ public class BodyController {
             alert.setHeaderText("Programming Project");
             alert.setContentText("Project by: Jeffrey, Philip" + "\n" +
             "Check Github for Latest Update: https://github.com/jgrospe92/Department_with_GUI" + "\n" +
-            "version: 4.0");
+            "version: 4.5");
             alert.show();
         }
         
