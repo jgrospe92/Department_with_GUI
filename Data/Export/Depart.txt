@@ -1,3 +1,0 @@
-1001,Exact Science,1234,Steve James,27,male,computer vision,master,1001
-1003,Humanities
-1005,Social Science
