@@ -5,7 +5,7 @@
 - [Table of Contents](#table-of-contents)
   - [How to Run the Program (mac)](#how-to-run-the-program-mac)
   - [How to Run the Program (windows)](#how-to-run-the-program-windows)
-  - [Project By](#project-by)
+- [Project By](#project-by)
 ## How to Run the Program (mac)
 - Mac Version (VSCODE)
  - Download java jdk  latest.
