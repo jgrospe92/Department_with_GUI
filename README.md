@@ -21,7 +21,7 @@
  - Run the App.java
   
 ## How to Run the Program (windows)
-- Mac Version (VSCODE)
+- Windows Version (VSCODE)
  - Download java jdk  latest.
  - Download the latest javafx SDK (18-ea+8) aarch64 from openjfx.io.
  - Extract it somewhere you can easily access.
