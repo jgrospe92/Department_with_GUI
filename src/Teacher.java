@@ -92,12 +92,16 @@ public class Teacher extends Person implements PayRoll{
     
     @Override
     public double computePayRoll() {
-       String phd = this.degree.toLowerCase();
-       String  master = this.degree.toLowerCase();
-       String bachelor = this.degree.toLowerCase();
+        String phd = this.degree.toLowerCase();
+        String master = this.degree.toLowerCase();
+        String bachelor = this.degree.toLowerCase();
 
-        int salDegree = (phd.equals("phd")) ? 112 : (master.equals("master" ) ? 82 : (bachelor.equals("bachelor")) ? 42 : 0); 
-        return (36 * salDegree * 2) * 0.76;
+        int salDegree = (phd.equals("phd")) ? 112
+                : (master.equals("master") ? 82 : (bachelor.equals("bachelor")) ? 42 : 0);
+
+        Double result = (36 * salDegree * 2) * 0.76;
+
+        return Math.round(result * 100.00 )  / 100.00;
 
     }
 
